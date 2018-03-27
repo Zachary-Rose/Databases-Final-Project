@@ -1,22 +1,3 @@
-<?php
-session_start();
-$_SESSION['error message'] = '';
-
-$mysqli = new mysqli('localhost', 'root', 'mypass123', 'accounts');
-
-if ($SERVER['REQUEST_METHOD'] =='POST'){
-  
-  if( isset($_POST['login']) ){
-    require 'login.php'
-  }
-  elseif( isset($_POST['register']) ){
-    require 'signup.php';
-  }
-
-}
-
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en" >

@@ -1,23 +1,3 @@
-<?php
-session_start();
-$_SESSION['error message'] = '';
-
-$mysqli = new mysqli('localhost', 'root', 'mypass123', 'accounts');
-
-if ($SERVER['REQUEST_METHOD'] =='POST'){
-  
-  if( isset($_POST['login']) ){
-    require 'login.php'
-  }
-  elseif( isset($_POST['register']) ){
-    require 'signup.php';
-  }
-
-}
-
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en" >
 
@@ -38,7 +18,7 @@ if ($SERVER['REQUEST_METHOD'] =='POST'){
 
 <body>
 
-<form class="form-signin" method="POST" action="../php/connection.php" >
+<form class="form-signin" method="POST" action="../php/connect.php" >
   
 <div class="container">
   <form>
@@ -65,7 +45,7 @@ if ($SERVER['REQUEST_METHOD'] =='POST'){
   
       
 
-      <button name = "login" class="button"  href="login.html" >Login</button>
+      <center><button name = "login" class="button"  href="login.html" >Login</button><center>
 
       <h4>Need to make an account? <span><a name = "signup" class="btn btn-default signup" href="signup.html">SignUp</a></span></h4>
     </div>
