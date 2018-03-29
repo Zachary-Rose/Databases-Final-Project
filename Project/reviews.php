@@ -1,4 +1,25 @@
+<?php
+    session_start();
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "FINAL_theater2db";
+    
+    // Connect to Database
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection_failed:" . $conn->connect_error);
+    }
 
+    // Get all movie names
+    $movie_query_result = $conn->query("select distinct MovieTitle from Showing");
+    //$num_movies = count($movies);
+
+
+    $moviecValue = $_SESSION['moviecName']
+    
+?>
 
       <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +31,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Portfolio Item - Start Bootstrap Template</title>
+    <title>Reviews of a Movie</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -25,26 +46,22 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Theater 332</a>
+        <a class="navbar-brand" href="#">TheaterHub</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="home.html">Home
+              <a class="nav-link" href="home.php">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="search.html">Search</a>
+              <a class="nav-link" href="search.php">Search</a>
             </li>
              <li class="nav-item">
-              <a class="nav-link" href="profile.html">Profile</a>
-            </li>
-             </li>
-             <li class="nav-item">
-              <a class="nav-link" href="reviews.html">Reviews</a>
+              <a class="nav-link" href="profile.php">Profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="login.html">Logout</a>

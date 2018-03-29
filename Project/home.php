@@ -1,3 +1,25 @@
+<?php
+    session_start();
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "FINAL_theater2db";
+    
+    // Connect to Database
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection_failed:" . $conn->connect_error);
+    }
+
+    // Get all movie names
+    $movie_query_result = $conn->query("select distinct MovieTitle from Showing");
+    //$num_movies = count($movies);
+
+    $_SESSION['moviecName'] = $movieValue;
+    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +30,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Portfolio Item - Start Bootstrap Template</title>
+    <title>Home Page of TheaterHub</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -38,14 +60,10 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="search.html">Search</a>
+              <a class="nav-link" href="search.php">Search</a>
             </li>
              <li class="nav-item">
-              <a class="nav-link" href="profile.html">Profile</a>
-            </li>
-             </li>
-             <li class="nav-item">
-              <a class="nav-link" href="reviews.html">Reviews</a>
+              <a class="nav-link" href="profile.php">Profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="login.html">Logout</a>
@@ -60,12 +78,8 @@
     <div class="container">
 
       <!-- Portfolio Item Heading -->
-      <h1 class="my-4">New Releases
-        <small>Check them out!</small>
-      </h1>
+      <h1 class="my-4">Welcome <small>Check out movies playing in theaters!</small></h1>
 
-
-    
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -110,59 +124,44 @@
 
 <div class="row">
 
-            <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="blackpanther.jpeg" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="#">Black Panther</a>
-                  </h4>
-                  <h5>Now Playing!</h5>
-                  <p class="card-text">After the death of his father, TChalla returns home to the African nation of Wakanda to take his rightful place as king. When a powerful enemy suddenly reappears, TChallas mettle as king -- and as Black Panther -- gets tested when he is drawn into a conflict that puts the fate of Wakanda and the entire world at risk. Faced with treachery and danger, the young king must rally his allies and release the full power of Black Panther to defeat his foes and secure the safety of his people.</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
-              </div>
-            </div>
+ <?php
+      while ($row = mysqli_fetch_array($movie_query_result)) {
 
-  <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="blackpanther.jpeg" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="#">Black Panther</a>
-                  </h4>
-                  <h5>Now Playing!</h5>
-                  <p class="card-text">After the death of his father, TChalla returns home to the African nation of Wakanda to take his rightful place as king. When a powerful enemy suddenly reappears, TChallas mettle as king -- and as Black Panther -- gets tested when he is drawn into a conflict that puts the fate of Wakanda and the entire world at risk. Faced with treachery and danger, the young king must rally his allies and release the full power of Black Panther to defeat his foes and secure the safety of his people.</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
-              </div>
-            </div>
+            $movie = $row['MovieTitle'];
+            $plot_query_result = $conn->query("select PlotSynopsis from Movie where MovieTitle ='$movie'");
+            $plot = mysqli_fetch_array($plot_query_result)['PlotSynopsis'];
 
-             <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="blackpanther.jpeg" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="#">Black Panther</a>
-                  </h4>
-                  <h5>Now Playing!</h5>
-                  <p class="card-text">After the death of his father, TChalla returns home to the African nation of Wakanda to take his rightful place as king. When a powerful enemy suddenly reappears, TChallas mettle as king -- and as Black Panther -- gets tested when he is drawn into a conflict that puts the fate of Wakanda and the entire world at risk. Faced with treachery and danger, the young king must rally his allies and release the full power of Black Panther to defeat his foes and secure the safety of his people.</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
-              </div>
-            </div>
+            $rating_query_result = $conn->query("select Rating from Movie where MovieTitle ='$movie'");
+            $rating = mysqli_fetch_array($rating_query_result)['Rating'];
 
-          </div>
-          <!-- /.row -->
+            $runtime_query_result = $conn->query("select RunningTime from Movie where MovieTitle ='$movie'");
+            $runtime = mysqli_fetch_array($runtime_query_result)['RunningTime'];
 
-<br>
+            $image_query_result = $conn->query("select ImageURL from Movie where MovieTitle ='$movie'");
+            $image = mysqli_fetch_array($image_query_result)['ImageURL'];
 
+            echo "<div class='col-lg-4 col-md-6 mb-4'>";
+              echo "<div class='card h-100'>";
+                echo "<a> <img class= 'card-img-top' src='../images/" . $ImageURL . " alt='' > </a>";
+                echo "<div class='card-body'>";
+                  echo "<h4 class='card-title'><a href=''>" . $movie . "</a></h4>";
+                  echo "<h5>Rating: " . $rating . "</h5>";
+                  echo "<h5>Runtime: " . $runtime . "</h5>";
+                  echo "<p class='card-text'>" . $plot ."</p>";
+                    echo "<div class='col-md-4 mb-3'>";
+                    
+                    echo "<p><a name = ''class='btn btn-secondary' href='../Project/reviews.php?'" . $row['MovieTitle'] . "' role='button'>Reviews &raquo;</a></p>";
+                    echo "</div>";
+                    echo "</div>";
+                echo "</div>";
+              echo "</div>";
+            echo "</div>";
+
+            echo "<br>";
+      }
+ ?>
+
+ </div>
 
     <!-- Footer -->
     <footer class="py-5 bg-dark">
