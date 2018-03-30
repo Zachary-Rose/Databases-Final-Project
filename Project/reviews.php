@@ -3,7 +3,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "FINAL_theater2db";
+    $dbname = "final_theaterdb";
     
     // Connect to Database
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -17,8 +17,9 @@
     //$num_movies = count($movies);
 
 
-    $moviecValue = $_SESSION['moviecName']
-    
+    ///$movieValue = $_SESSION['moviecName'];
+    //$moviecValue = 'Black Panther';
+    //echo $movieValue;
 ?>
 
       <!DOCTYPE html>
@@ -74,42 +75,45 @@
     <!-- Page Content -->
     <div class="container">
 
-      <!-- Portfolio Item Heading -->
-      <h1 class="my-4">Review Black Panther:</h1>
-      
-      <br>
+<?php
+
+            $moviecValue = $_GET['Title'];
 
 
-          <!-- Comments Form -->
-          <div class="card my-4">
-            <h5 class="card-header">Leave a Review:</h5>
-            <div class="card-body">
-              <form>
-                <div class="form-group">
-                  <textarea class="form-control" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
-            </div>
-          </div>
+                  //<!-- Portfolio Item Heading -->
+      echo "<h1 class='my-4'> " . $moviecValue . "</h1>";
+      echo "<br>";
 
-   <!-- Single Comment -->
-          <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-              <h5 class="mt-0">JP McCluskey</h5>
-              Almost died watching movie, fire alarm went off but had to keep watching. Very good
-            </div>
-          </div>
+            // Get all reviews for that movie names
+            $reviews_query_result = $conn->query("select Review from Reviews where MovieTitle ='$moviecValue'");
+            
 
-             <!-- Single Comment -->
-          <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-              <h5 class="mt-0">Commenter Name</h5>
-              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            </div>
-          </div>
+      while ($row = mysqli_fetch_array($reviews_query_result)) {
+
+        $review = $row['Review'];
+        
+        
+
+            //$movie = $row['MovieTitle'];
+
+
+            //$review_query_result = $conn->query("select Review from Reviews where MovieTitle ='$moviecValue'");
+            //$review = mysqli_fetch_array($review_query_result)['Review'];
+ 
+
+
+
+   // <!-- Single Comment -->
+          echo "<div class='media mb-4'>";
+            echo "<img class='d-flex mr-3 rounded-circle' src='http://placehold.it/50x50' alt=''>";
+            echo "<div class='media-body'>";
+              echo "<h5 class='mt-0'> Ticket Hub User </h5>";
+              echo "<p> " . $review . " <p>";
+            echo "</div>";
+          echo "</div>";
+
+      }
+  ?>
 
    <br>
    </div>

@@ -3,7 +3,7 @@ session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "FINAL_theater2db";
+$dbname = "final_theaterdb";
 
 
 $today = strtotime("Yesterday"); //???? Why won't it work for today

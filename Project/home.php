@@ -3,7 +3,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "FINAL_theater2db";
+    $dbname = "final_theaterdb";
     
     // Connect to Database
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -15,9 +15,7 @@
     // Get all movie names
     $movie_query_result = $conn->query("select distinct MovieTitle from Showing");
     //$num_movies = count($movies);
-
-    $_SESSION['moviecName'] = $movieValue;
-    
+ 
 ?>
 
 <!DOCTYPE html>
@@ -88,21 +86,21 @@
         </ol>
         <div class="carousel-inner" role="listbox">
           <!-- Slide One - Set the background image for this slide in the line below -->
-          <div class="carousel-item active" style="background-image: url('popcorn.jpg')">
+          <div class="carousel-item active" style="background-image: url('images/popcorn.jpg')">
             <div class="carousel-caption d-none d-md-block">
               <h3>Popcorn SALE!</h3>
               <p>15% OFF Popcorn on Wednesdays!</p>
             </div>
           </div>
           <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('movietheater.jpg')">
+          <div class="carousel-item" style="background-image: url('images/movietheater.jpg')">
              <div class="carousel-caption d-none d-md-block">
               <h3>What will you see next?</h3>
               
             </div>
           </div>
           <!-- Slide Three - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('newtheater.jpg')">
+          <div class="carousel-item" style="background-image: url('images/newtheater.jpg')">
             <div class="carousel-caption d-none d-md-block">
               <h3>New IMAX Theater!</h3>
               <p>Open now in Kingston</p>
@@ -119,15 +117,19 @@
         </a>
       </div>
    
-<br>
-   
 
-<div class="row">
+<br>
 
  <?php
+
+echo "<div class='row'>";
+
+
       while ($row = mysqli_fetch_array($movie_query_result)) {
 
             $movie = $row['MovieTitle'];
+             //$_SESSION['moviecName'] = $movie;
+
             $plot_query_result = $conn->query("select PlotSynopsis from Movie where MovieTitle ='$movie'");
             $plot = mysqli_fetch_array($plot_query_result)['PlotSynopsis'];
 
@@ -142,26 +144,33 @@
 
             echo "<div class='col-lg-4 col-md-6 mb-4'>";
               echo "<div class='card h-100'>";
-                echo "<a> <img class= 'card-img-top' src='../images/" . $ImageURL . " alt='' > </a>";
+                echo "<a> <img class= 'card-img-top' src='../images/" . $image . "' alt='' > </a>";
                 echo "<div class='card-body'>";
                   echo "<h4 class='card-title'><a href=''>" . $movie . "</a></h4>";
                   echo "<h5>Rating: " . $rating . "</h5>";
                   echo "<h5>Runtime: " . $runtime . "</h5>";
                   echo "<p class='card-text'>" . $plot ."</p>";
-                    echo "<div class='col-md-4 mb-3'>";
-                    
-                    echo "<p><a name = ''class='btn btn-secondary' href='../Project/reviews.php?'" . $row['MovieTitle'] . "' role='button'>Reviews &raquo;</a></p>";
+                  echo "<div class='col-md-4 mb-3'>";
+      
+    echo "<form method='get' action='reviews.php'>";
+    echo "<input type='hidden' name='Title' value='$movie'>";
+    echo "<input type='submit' value = 'Reviews'>";
+    echo "</form>";
+  
                     echo "</div>";
                     echo "</div>";
                 echo "</div>";
               echo "</div>";
-            echo "</div>";
+            //echo "</div>";
 
-            echo "<br>";
+            
       }
+       echo "<br>";
+      echo "</div>";
  ?>
 
- </div>
+   </div>
+<br>
 
     <!-- Footer -->
     <footer class="py-5 bg-dark">

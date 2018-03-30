@@ -3,7 +3,8 @@
 $servername = "localhost";
 $username = "root";
 $passworddb = "";
-$dbname = "FINAL_theater2db";
+$dbname = "final_theaterdb";
+
 $fname = $_POST["FNAME"]; 
 $lname = $_POST["LNAME"]; 
 $email = $_POST["Email"]; 
