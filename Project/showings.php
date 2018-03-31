@@ -12,11 +12,14 @@
         die("Connection_failed:" . $conn->connect_error);
     }
 
-   
+    // Values from Search
+    $theaterVal = $_GET['Title'];
+    $movieVal = $_GET['Title'];
+    $dayVal = $_GET['Title'];
 
 ?>
 
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -26,13 +29,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Search page</title>
+    <title>Showing showings of Search</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/portfolio-item.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/half-slider.css" rel="stylesheet">
 
   </head>
 
@@ -58,7 +64,6 @@
              <li class="nav-item">
               <a class="nav-link" href="profile.php">Profile</a>
             </li>
-             </li>
             <li class="nav-item">
               <a class="nav-link" href="login.html">Logout</a>
             </li>
@@ -67,106 +72,66 @@
       </div>
     </nav>
 
-    <!-- Page Content -->
+
+ <!-- Page Content -->
     <div class="container">
 
       <!-- Portfolio Item Heading -->
-      <h1 class="my-4">Search Movies</h1>
+      <h1 class="my-4">Showings<small>What time works best for you?</small></h1>
 
-      <br>
+ <?php
 
-<!-- Portfolio Item Row -->
-<form class="d-flex justify-content-around" action="../Project/showings.php" method="POST">
-
-      <div class="row">
-        <div class="col-md-4">
-          <h3 class="my-3" for="complexselect">Theater:</h3>
-
-          <select class="custom-select" id="complex" name="complex_chosen">
-    <?php  
-
-         // Get all theater names
-    $complex_query_result = $conn->query("select distinct ComplexName from Showing");
+echo "<div class='row'>";
 
 
-    while ($row = mysqli_fetch_array($complex_query_result)) {
-        unset($id, $complex); 
-        $complex = $row['ComplexName'];
-        echo "<option value='" . $complex . "'>" . $complex . "</option>";
-    }
+    // Get all showings of searched params
+    $showing_query_result = $conn->query("select distinct ShowingNumber from Showing where MovieTitle ='$moviecVal' and ComplexName = '$theaterVal' and StartDate = 'dayVal' ");
 
-    ?>
+ while ($row = mysqli_fetch_array($showing_query_result)) {
 
-
-        </select>
-      </div>
-      </div>
-
-      <!-- /.row -->
-
-<br>
-
-<!-- Portfolio Item Row -->
-      <div class="row">
-        <div class="col-md-4">
-          <h3 class="my-3">Movie:</h3>
-           <select class="custom-select" id="movie" name="movie_chosen">
-          <?php  
-            // Get all movie names
-    $movie_query_result = $conn->query("select distinct MovieTitle from Showing");
-
-    while ($row = mysqli_fetch_array($movie_query_result)) {
-            unset($id, $movie);
-            $movie = $row['MovieTitle'];
-            echo "<option value='" . $movie . "'>" . $movie . "</option>";
-}
-?>
-        </select>
-      </div>
-      </div>
-
-      <!-- /.row -->
-
-<br>
-
-      <!-- Portfolio Item Row -->
-      <div class="row">
-        <div class="col-md-4">
-          <h3 class="my-3" for="date">Day:</h3>
+        $showing = $row['ShowingNumber'];
+        $movie = $row['MovieTitle'];
+        $complex = $row['ComplexName']; 
+        $time = $row['StartTime'];
+        $theater = $row['TheaterNumber'];
+        $numseat = $row['NumberOfSeatsAvailable'];
+        $date = $row['StartDate'];     
         
-        <select class="custom-select" id="date" name="date_chosen">
-  <?php
-            // Get all showing dates
-    $date_query_result = $conn->query("select distinct StartDate from Showing");
-    while ($row = mysqli_fetch_array($date_query_result)) {
 
-            $date = $row['StartDate'];
-       echo "<option value='" . $date . "'>" . $date . "</option>";
-          }
-?>
-        </select>
+            echo "<div class='col-lg-4 col-md-6 mb-4'>";
+              echo "<div class='card h-100'>";
+                echo "<div class='card-body'>";
+                  echo "<h4 class='card-title'><a href=''>" . $movie . "</a></h4>";
+                  echo "<h5>Complex: " . $complex . "</h5>";
+                  echo "<h5>Theater Number: " . $theater . "</h5>";
+                  echo "<h5>Day: " . $date . "</h5>";
+                  echo "<h5>Time: " . $time . "</h5>";
+                  echo "<h5>Number of Seats Available: " . $numseat . "</h5>";
+                  echo "<h5>Cost per Seat:  10$ </h5>";
+                  echo "<div class='col-md-4 mb-3'>";
+      
+    echo "<form method='get' action='buy.php'>";
+    echo "<input type='hidden' name='Title' value='$movie'>";
+    echo "<input type='submit' value = 'Purchase'>";
+    echo "</form>";
+  
+                    echo "</div>";
+                    echo "</div>";
+                echo "</div>";
+              echo "</div>";
+            //echo "</div>";
 
-        </div>
-      </div>
-      <!-- /.row -->
+            
+      }
+       echo "<br>";
+      echo "</div>";
+ ?>
+
+   </div>
 
 <br>
-
-
-
-
-
-<div class="row">
-<div class="pb-3">
-
-<button class="btn btn-primary pb-2" type="submit">Get Showings &raquo;</button>
-
-</div>
-</div>
+<center><a class="btn btn-primary" href="search.php">Change Search</a><center>
 <br>
-</form>
-<br>
-
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
