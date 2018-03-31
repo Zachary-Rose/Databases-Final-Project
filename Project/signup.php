@@ -169,8 +169,8 @@ function test_input($data) {
       </div>
       <div class="col-half">
 
-
-      <center><input type="submit" name="submit" value="Submit"><center>
+       <center><a class="btn btn-primary" href="login.html">SUBMIT</a><center>
+    
   </form>
 
   <?php
