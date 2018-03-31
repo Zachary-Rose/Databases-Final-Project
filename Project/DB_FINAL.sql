@@ -1,6 +1,8 @@
 
 create database FINAL_theaterdb;
 
+	##TEST##
+
 CREATE TABLE TheaterComplex (
 ComplexName			        VARCHAR(50)	    NOT NULL,
 NumberOfTheaters			INTEGER		    NOT NULL,
