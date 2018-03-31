@@ -1,107 +1,105 @@
 
 <?php
 session_start();
-$servernname = "127.0.0.1";
 $dbname = "FINAL_theaterdb";
-$today = starttime("Yesterday");
-$recemail = $_POST["email"];
-$recpass = $_POST["password"];
-$_SESSION["email"] = $recemail;
-$_SESSION['current_date'] = date("Y-m-d", $today);
-echo $SESSION['current_date'];
+$servername = "localhost";
+$username = "root";
+$password = "";
+
 
 //create connection
-$conn = new mysqli($servernname, $username, $password,$dbname);
+$conn = new mysqli($servername, $username, $password,$dbname);
 //check connection
 if ($conn -> connect_error) {
   die("connection failed: " . $conn->connect_error);
 }
 
 
-$fName = $lName = $address = $phoneNum = $city = $email =$password =$cardNum =$CVC = $cardExp = "";
+$fName = $lName = $street = $streetNumber = $phoneNum = $city = $email =$password =$cardNum = $cardExp = "";
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-if ($_SERVER["REQUEST_ METHOD"] == "POST"){
-  $fName = test_input($_POST["fName"]);
+if (empty($_POST["fName"])) {
+    $fName = "";
+  } else {
+    $fName = "'". test_input($_POST["fName"]."'");
+  }
+
+  if (empty($_POST["lName"])) {
+    $lName = "";
+  } else {
+    $lName = "'". test_input($_POST["lName"]."'");
+  }
+
+  if (empty($_POST["street"])) {
+    $street = "";
+  } else {
+    $street = "'". test_input($_POST["street"]."'");
+  }
+
+  if (empty($_POST["streetNumber"])) {
+    $streetNumber = "";
+  } else {
+    $streetNumber = test_input($_POST["streetNumber"]);
+  }
+  if (empty($_POST["phoneNum"])) {
+    $phoneNum = "";
+  } else {
+    $phoneNum = test_input($_POST["phoneNum"]);
+  }
+  if (empty($_POST["city"])) {
+    $city = "";
+  } else {
+    $city = "'". test_input($_POST["city"]."'");
+  }
+  if (empty($_POST["email"])) {
+    $email = "";
+  } else {
+    $email = "'". test_input($_POST["email"]."'");
+  }
+  if (empty($_POST["password"])) {
+    $password = "";
+  } else {
+    $password = "'". test_input($_POST["password"]."'");
+  }
+  if (empty($_POST["cardNum"])) {
+    $cardNum = "";
+  } else {
+    $cardNum = "'". test_input($_POST["cardNum"]."'");
+  }
+  if (empty($_POST["cardExp"])) {
+    $cardExp = "";
+  } else {
+    $cardExp = test_input($_POST["cardExp"]);
+  }
 }
 
-if ($_SERVER["REQUEST_ METHOD"] == "POST"){
-  $lName = test_input($_POST["lName"]);
-}
-if ($_SERVER["REQUEST_ METHOD"] == "POST"){
-  $address = test_input($_POST["address"]);
-}
-if ($_SERVER["REQUEST_ METHOD"] == "POST"){
-  $phoneNum = test_input($_POST["phoneNum"]);
-}
-if ($_SERVER["REQUEST_ METHOD"] == "POST"){
-  $city = test_input($_POST["city"]);
-}
-if ($_SERVER["REQUEST_ METHOD"] == "POST"){
-  $email = test_input($_POST["email"]);
-}
-if ($_SERVER["REQUEST_ METHOD"] == "POST"){
-  $password = test_input($_POST["password"]);
-}
-if ($_SERVER["REQUEST_ METHOD"] == "POST"){
-  $cardNum = test_input($_POST["cardNum"]);
-}
-if ($_SERVER["REQUEST_ METHOD"] == "POST"){
-  $CVC = test_input($_POST["CVC"]);
-}
-if ($_SERVER["REQUEST_ METHOD"] == "POST"){
-  $cardExp = test_input($_POST["cardExp"]);
-}
-
-$sql = "INSERT INTO User (`fName`,`lName`,`phoneNum`,`email`,`address`,`city`, 'password',`cardNum`,`CVC`, `cardExp`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-if($stmt = mysqli_prepare($link, $sql)){
-    // Bind variables to the prepared statement as parameters
-    mysqli_stmt_bind_param($stmt, "sssssssss", $param_fName, $param_lName, $param_phoneNum, $param_email, $param_address, $param_city, $param_password $param_cardNum, $param_CVC, $param_cardExp,);
-
-    // Set parameters
-    $param_fName = $fName;
-    $param_lName = $lName;
-    $param_phoneNum = $phoneNum;
-    $param_email = $email;
-    $param_address = $address;
-    $param_city = $city;
-    $param_password = $password;
-    $param_cardNum = $cardNum;
-    $param_CVC = $CVC;
-    $param_cardExp = $cardExp;
-
-    // Attempt to execute the prepared statement
-    if(mysqli_stmt_execute($stmt)){
-        // Redirect to login page
-        header("location: login.php");
-    } else{
-
-    }
-}
-else
-    echo "ERROR";
+$accountNumberGenerator = mt_rand(10000000, 99999999);
+$adminCheck = 0; 
 
 
-
-
+                  
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+ }  
 
 ?>
 
 <html lang="en" >
-
 <head>
   <meta charset="UTF-8">
+
   <title>Sign Up Form</title>
+   <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 
       <link rel="stylesheet" href="css/style2.css">
-
-
-
 
 </head>
 
@@ -112,20 +110,25 @@ else
   <form>
     <div class="row">
       <h4>Create Account</h4>
-      <div> class ="alert alert-error>"<?=$_SESSION['message'] ?></div>
-
+      </div>
+    
       <div class="input-group input-group-icon">
         <input type="text" placeholder="First Name" name = "fName" value ="<?php echo $fName;?>" required/>
-        <div class="input-icon"><i class="fa fa-user"></i></div>
+        <div class="input-icon"></div>
       </div>
 
       <div class="input-group input-group-icon">
         <input type="text" placeholder="Last Name" name = "lName" value ="<?php echo $lName;?>"  required/>
-        <div class="input-icon"><i class="fa fa-user"></i></div>
+        <div class="input-icon"></div>
       </div>
 
       <div class="input-group">
-        <input type="text" placeholder="Street Adress"  name = "address" value ="<?php echo $address;?>"  required/>
+        <input type="text" placeholder="street"  name = "street" value ="<?php echo $street;?>"  required/>
+        <div class="input-icon"></div>
+      </div>
+
+       <div class="input-group">
+        <input type="text" placeholder="Street Number"  name = "streetNumber" value ="<?php echo $streetNumber;?>"  required/>
         <div class="input-icon"></div>
       </div>
 
@@ -160,50 +163,53 @@ else
       </div>
       <div class="col-half">
         <div class="input-group input-group-icon">
-          <input type="text" placeholder="Card CVC"  name = "CvC" value ="<?php echo $CVC;?>"  required/>
+          <input type="text" placeholder="ExpiraryDate"  name = "cardExp" value ="<?php echo $cardExp;?>"  required/>
           <div class="input-icon"><i class="fa fa-user"></i></div>
         </div>
       </div>
       <div class="col-half">
-        <div class="input-group">
-          <select>
-            <option>01</option>
-            <option>02</option>
-            <option>03</option>
-            <option>04</option>
-            <option>05</option>
-            <option>06</option>
-            <option>07</option>
-            <option>08</option>
-            <option>09</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-          </select>
-          <select>
-            <option>2018</option>
-            <option>2019</option>
-            <option>2020</option>
-            <option>2021</option>
-            <option>2022</option>
-            <option>2023</option>
-            <option>2024</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <h4>Create Account</h4>
 
 
-      <center><button class="button" href="login.html" >Signup</button><center>
-
-      <h4>Already have an account? <span><a class="btn btn-default signup" href="login.html">Login</a></span></h4>
-    </div>
+      <center><input type="submit" name="submit" value="Submit"><center>
   </form>
-</div>
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+  <?php
+$sql = "INSERT INTO User 
+VALUES ($accountNumberGenerator, $fName, $lName, $streetNumber, $street, $city, $phoneNum, $email, $password, $cardNum, $cardExp, $adminCheck)";
+
+if ($conn->query($sql) === TRUE) {
+   echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+
+#echo "TEST VIEWING INPUTS";
+#echo "<br>";
+#echo $accountNumberGenerator;
+#echo "<br>";
+#echo $fName;
+#echo "<br>";
+#echo $lName;
+#echo "<br>";
+#echo $streetNumber;
+#echo "<br>";
+#echo $street;
+#echo "<br>";
+#echo $city;
+#echo "<br>";
+#echo $phoneNum;
+#echo "<br>";
+#echo $email;
+#echo "<br>";
+#echo $password;
+#echo "<br>";
+#echo $cardNum;
+#echo "<br>";
+#echo $cardExp;
+#echo "<br>";
+#echo $adminCheck;
+?>
 
 </body>
-
 </html>
