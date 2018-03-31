@@ -119,7 +119,22 @@
                   echo "<h5>Time: " . $time . "</h5>";
                   echo "<h5>Number of Seats Available: " . $numseat . "</h5>";
                   echo "<h5>Cost per Seat:  10$ </h5>";
-                  echo "<div class='col-md-4 mb-3'>";
+      echo "<h5>Number of Tickets: </h5>";
+        echo "<select class='custom-select' id='numtickets' name='numtickets_chosen'>";
+            // Get all showing dates
+    $date_query_result = $conn->query("select distinct StartDate from Showing");
+    
+     for ($x = 0; $x <= $numseat; $x++) {
+        
+        echo "<option value='" . $x . "'>" . $x . "</option>";
+     } 
+            
+        echo "</select>";
+
+echo "<br>";
+echo "<br>";
+
+        echo "<div class='col-md-4 mb-3'>";
       
             echo "<form method='get' action='buy.php'>";
             echo "<input type='hidden' name='Title' value='$movie'>";
@@ -137,8 +152,6 @@
     echo "<br>";
     echo "</div>";
  ?>
-
-   </div>
 
 <br>
 <center><a class="btn btn-primary" href="search.php">Change Search</a><center>

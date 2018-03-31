@@ -87,25 +87,13 @@
             // Get all reviews for that movie names
             $reviews_query_result = $conn->query("select Review from Reviews where MovieTitle ='$moviecValue'");
             
-
+      // <!-- Single Comment -->
       while ($row = mysqli_fetch_array($reviews_query_result)) {
 
         $review = $row['Review'];
-        
 
-
-            //$movie = $row['MovieTitle'];
-
-
-            //$review_query_result = $conn->query("select Review from Reviews where MovieTitle ='$moviecValue'");
-            //$review = mysqli_fetch_array($review_query_result)['Review'];
- 
-
-
-
-   // <!-- Single Comment -->
           echo "<div class='media mb-4'>";
-            echo "<img class='d-flex mr-3 rounded-circle' src='http://placehold.it/50x50' alt=''>";
+            echo "<img class='d-flex mr-3 rounded-circle' src='images/user.png' alt=''>";
             echo "<div class='media-body'>";
               echo "<h5 class='mt-0'> Ticket Hub User </h5>";
               echo "<p> " . $review . " <p>";
