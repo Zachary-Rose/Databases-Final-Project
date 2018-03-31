@@ -171,7 +171,6 @@ Postal Code: <input type="text" name="Postal" value="<?php echo $Postal;?>"><br>
 <input type="submit" class="button" name="submit" value="Add" align="center">
 </form>
 		  <?php
-echo "<h2>Your Input:</h2>";
 echo $Name;
 echo "<br>";
 echo $Num;
@@ -219,23 +218,119 @@ Address: <input type="text" name="Name" value=""><br>
 		  </div>
 </section>
 
-	<section class="hero" id="hero">
+ </section>
+	<?php
+	$Title = $RunTime = $Rating = $Plot = $Director = $Production = $Supplier = $StartDate = $EndDate = "";
+	
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		
+		if (empty($_POST["Title"])) {
+    	$Title = "";
+  		} 
+		else {
+    	$Title = "'".test_input($_POST["Title"]."'");
+  		}
+		if (empty($_POST["RunTime"])) {
+    	$RunTime = "";
+  		} 
+		else {
+    	$RunTime = test_input($_POST["RunTime"]);
+  		}
+  		if (empty($_POST["Rating"])) {
+    	$Rating = "";
+  		}
+		else {
+    	$Rating ="'". test_input($_POST["Rating"]."'");
+  		}
+		
+  		if (empty($_POST["Plot"])) {
+    	$Plot = "";
+  		} 
+		else {
+    	$Plot = "'".test_input($_POST["Plot"]."'");
+  		}
+  		if (empty($_POST["Director"])) {
+    	$Director = "";
+  		} 
+		else {
+    	$Director = "'".test_input($_POST["Director"]."'");
+		}
+		if (empty($_POST["Production"])) {
+    	$Production = "";
+  		} 
+		else {
+    	$Production = "'".test_input($_POST["Production"]."'");
+		}
+		if (empty($_POST["Supplier"])) {
+    	$Supplier = "";
+  		} 
+		else {
+    	$Supplier = "'".test_input($_POST["Supplier"]."'");
+		}
+		if (empty($_POST["StartDate"])) {
+    	$StartDate = "";
+  		} 
+		else {
+    	$StartDate ="'". test_input($_POST["StartDate"]."'");
+		}
+		if (empty($_POST["EndDate"])) {
+    	$EndDate = "";
+  		} 
+		else {
+    	$EndDate ="'". test_input($_POST["EndDate"]."'");
+		}
+	}
+	
+   
+
+	?>
+  <section class="hero" id="hero">
     <h2 class="hero_header">Add Movie </h2>
-	  <form action="/action_page.php">
+	  <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 		  <div align="center">
-Title: <input type="text" name="Name" value=""><br>
-Running Time: <input type="text" name="" value=""><br>
-Rating: <input type="text" name="Name" value=""><br>
-Plot: <input type="text" name="Name" value=""><br>
-Actors: <input type="text" name="Name" value=""><br>
-Director: <input type="text" name="Name" value=""><br>
-Production Company: <input type="text" name="Name" value=""><br>
-Supplier: <input type="text" name="Name" value=""><br>
-Start Date: <input type="text" name="Name" value=""><br>
-End Date: <input type="text" name="Name" value=""><br>
-<div class="button">Add</div>
+Title: <input type="text" name="Title" value="<?php echo $Title;?>"><br>
+Running Time: <input type="text" name="RunTime" value="<?php echo $RunTime;?>"><br>
+Rating: <input type="text" name="Rating" value="<?php echo $Rating;?>"><br>
+Plot: <input type="text" name="Plot" value="<?php echo $Plot;?>"><br>
+Director: <input type="text" name="Director" value="<?php echo $Director;?>"><br>
+Production Company: <input type="text" name="Production" value="<?php echo $Production;?>"><br>
+Supplier: <input type="text" name="Supplier" value="<?php echo $Supplier;?>"><br>
+Start Date: <input type="text" name="StartDate" value="<?php echo $StartDate;?>"><br>
+End Date: <input type="text" name="EndDate" value="<?php echo $EndDate;?>"><br>			  
+<input type="submit" class="button" name="submit" value="Add" align="center">
 </form>
+		  <?php
+echo $Title;
+echo "<br>";
+echo $RunTime;
+echo "<br>";
+echo $Rating;
+echo "<br>";
+echo $Plot;
+echo "<br>";
+echo $Director;
+echo "<br>";
+echo $Production;
+echo "<br>";
+echo $Supplier;
+echo "<br>";
+echo $StartDate;
+echo "<br>";
+echo $EndDate;
+?>
+		  
+		  <?php
+$sql = "INSERT INTO movie 
+VALUES ($Title, $RunTime, $Rating, $Plot, $Director, $Production, $Supplier, $StartDate, $EndDate)";
+if ($conn->query($sql) === TRUE) {
+   echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+		  ?>
 		  </div>
+</section>
+
 	</section>
 
 	 <section class="hero" id="hero">
