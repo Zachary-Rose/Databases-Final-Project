@@ -1,3 +1,20 @@
+<?php
+    session_start();
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "final_theaterdb";
+    
+    // Connect Database
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check Connection
+    if ($conn->connect_error) {
+        die("Connection_failed:" . $conn->connect_error);
+    }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +25,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Portfolio Item - Start Bootstrap Template</title>
+    <title>User Profil page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -23,26 +40,22 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Theater 332</a>
+        <a class="navbar-brand" href="#">Theater Hub</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="home.html">Home
+              <a class="nav-link" href="home.php">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="search.html">Search</a>
+              <a class="nav-link" href="search.php">Search</a>
             </li>
              <li class="nav-item">
-              <a class="nav-link" href="profile.html">Profile</a>
-            </li>
-             </li>
-             <li class="nav-item">
-              <a class="nav-link" href="reviews.html">Reviews</a>
+              <a class="nav-link" href="profile.php">Profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="login.html">Logout</a>
@@ -51,9 +64,6 @@
         </div>
       </div>
     </nav>
-
-
-
 
  <!-- Page Content -->
     <div class="container">
@@ -70,24 +80,10 @@
 
 <div class="row">
 
-        <div class="col-sm-4 my-4">
-          <div class="card">
-            <img class="card-img-top" src="http://placehold.it/300x200" alt="">
-            <div class="card-body">
-              <h4 class="card-title">Black Panther</h4>
-              <p class="card-text">Number of Tickets: 2 </p>
-              <p class="card-text">Showing Day: 24th </p>
-               <p class="card-text">Showing Time: 18:10 </p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Cancel Purchase</a>
-            </div>
-          </div>
-        </div>
+
 
        <div class="col-sm-4 my-4">
           <div class="card">
-            <img class="card-img-top" src="http://placehold.it/300x200" alt="">
             <div class="card-body">
               <h4 class="card-title">Batman</h4>
               <p class="card-text">Number of Tickets: 5 </p>
@@ -103,7 +99,6 @@
 
         <div class="col-sm-4 my-4">
           <div class="card">
-            <img class="card-img-top" src="http://placehold.it/300x200" alt="">
             <div class="card-body">
               <h4 class="card-title">Peter Rabbit</h4>
               <p class="card-text">Number of Tickets: 1 </p>
