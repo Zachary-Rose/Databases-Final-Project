@@ -14,10 +14,11 @@
 
     // Get all movie names
     $movie_query_result = $conn->query("select distinct MovieTitle from Showing");
-  
+    //$num_movies = count($movies);
+ 
 ?>
 
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -27,13 +28,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Reviews of a Movie</title>
+    <title>Home Page of TheaterHub</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/portfolio-item.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/half-slider.css" rel="stylesheet">
 
   </head>
 
@@ -67,42 +71,33 @@
       </div>
     </nav>
 
-    <!-- Page Content -->
+
+     <!-- Page Content -->
     <div class="container">
 
-<?php
-            $moviecValue = $_GET['Title'];
+      <!-- Portfolio Item Heading -->
+      <h1 class="my-4"> Movie name: </h1>
 
-      //<!-- Portfolio Item Heading -->
-      echo "<h1 class='my-4'> " . $moviecValue . "</h1>";
-      echo "<br>";
+   <!-- Comments Form -->
+          <div class="card my-4">
+            <h5 class="card-header">Leave a Review:</h5>
+            <div class="card-body">
+              <form>
+                <div class="form-group">
+                  <textarea class="form-control" rows="2"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" href="profile.php">Submit</button>
+              </form>
+            </div>
+          </div>
 
-            // Get all reviews for that movie names
-            $reviews_query_result = $conn->query("select Review from Reviews where MovieTitle ='$moviecValue'");
-            
-      // <!-- Single Comment -->
-      while ($row = mysqli_fetch_array($reviews_query_result)) {
 
-        $review = $row['Review'];
-
-          echo "<div class='media mb-4'>";
-            echo "<img class='d-flex mr-3 rounded-circle' width='60' height='60' src='images/user.png' alt=''>";
-            echo "<div class='media-body'>";
-              echo "<h5 class='mt-0'> Ticket Hub User </h5>";
-              echo "<p> " . $review . " <p>";
-            echo "</div>";
-          echo "</div>";
-
-      }
-  ?>
-
-   <br>
-   </div>
+          </div>
 
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Theater Hub Corp</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Theater Hub</p>
       </div>
       <!-- /.container -->
     </footer>
