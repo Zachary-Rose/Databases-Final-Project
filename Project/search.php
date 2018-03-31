@@ -1,4 +1,20 @@
+<?php
+    session_start();
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "final_theaterdb";
+    
+    // Connect to Database
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection_failed:" . $conn->connect_error);
+    }
 
+   
+
+?>
 
       <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +26,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Portfolio Item - Start Bootstrap Template</title>
+    <title>Search page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -25,27 +41,24 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Theater 332</a>
+        <a class="navbar-brand" href="#">Theater Hub</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="home.html">Home
+              <a class="nav-link" href="home.php">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="search.html">Search</a>
+              <a class="nav-link" href="search.php">Search</a>
             </li>
              <li class="nav-item">
-              <a class="nav-link" href="profile.html">Profile</a>
+              <a class="nav-link" href="profile.php">Profile</a>
             </li>
              </li>
-             <li class="nav-item">
-              <a class="nav-link" href="reviews.html">Reviews</a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" href="login.html">Logout</a>
             </li>
@@ -63,16 +76,27 @@
       <br>
 
 <!-- Portfolio Item Row -->
+
       <div class="row">
         <div class="col-md-4">
           <h3 class="my-3">Theater:</h3>
-        </div>
-        <select>
-        <option value="volvo">Cineplex Kingston</option>
-        <option value="saab">Screening Room</option>
-        <option value="opel">Landmark Cinemas 10 Kingston</option>
+
+          <select>
+    <?php  
+
+         // Get all theater names
+    $complex_query_result = $conn->query("select distinct ComplexName from Showing");
+    while ($row = mysqli_fetch_array($complex_query_result)) {
+
+        $complex = $row['ComplexName'];
+        echo "<option value='" . $complex . "'>" . $complex . "</option>";
+    }
+
+    ?>
         </select>
       </div>
+      </div>
+
       <!-- /.row -->
 
 <br>
@@ -81,13 +105,20 @@
       <div class="row">
         <div class="col-md-4">
           <h3 class="my-3">Movie:</h3>
-        </div>
-        <select>
-        <option value="volvo">Black Panther</option>
-        <option value="saab">Batman</option>
-        <option value="opel">Peter Rabbit</option>
+          <select>
+          <?php  
+            // Get all movie names
+    $movie_query_result = $conn->query("select distinct MovieTitle from Showing");
+    while ($row = mysqli_fetch_array($movie_query_result)) {
+
+            $movie = $row['MovieTitle'];
+            echo "<option value='" . $movie . "'>" . $movie . "</option>";
+}
+?>
         </select>
       </div>
+      </div>
+
       <!-- /.row -->
 
 <br>
@@ -96,20 +127,25 @@
       <div class="row">
         <div class="col-md-4">
           <h3 class="my-3">Day:</h3>
-        </div>
+        
         <select>
-        <option value="volvo">March 24th, 2018</option>
-        <option value="saab">March 25th, 2018</option>
-        <option value="opel">March 26th, 2018</option>
+  <?php
+            // Get all showing dates
+    $date_query_result = $conn->query("select distinct StartDate from Showing");
+    while ($row = mysqli_fetch_array($date_query_result)) {
+
+            $date = $row['StartDate'];
+       echo "<option value='" . $date . "'>" . $date . "</option>";
+          }
+?>
         </select>
+
+        </div>
       </div>
       <!-- /.row -->
 
 <br>
-
-<a class="btn btn-primary" href="#">Search</a>
-
-
+<a class="btn btn-primary" href="showings.php">Search</a>
 <br>
 <br>
 

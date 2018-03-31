@@ -46,14 +46,14 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Theater 332</a>
+        <a class="navbar-brand" href="#">Theater Hub</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="home.html">Home
+              <a class="nav-link" href="home.php">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -85,6 +85,14 @@
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
+
+           <!-- Slide Two - Set the background image for this slide in the line below -->
+          <div class="carousel-item" style="background-image: url('images/logo.png')">
+             <div class="carousel-caption d-none d-md-block">
+              <h3></h3>
+              
+            </div>
+          </div>
           <!-- Slide One - Set the background image for this slide in the line below -->
           <div class="carousel-item active" style="background-image: url('images/popcorn.jpg')">
             <div class="carousel-caption d-none d-md-block">
@@ -92,13 +100,7 @@
               <p>15% OFF Popcorn on Wednesdays!</p>
             </div>
           </div>
-          <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('images/movietheater.jpg')">
-             <div class="carousel-caption d-none d-md-block">
-              <h3>What will you see next?</h3>
-              
-            </div>
-          </div>
+         
           <!-- Slide Three - Set the background image for this slide in the line below -->
           <div class="carousel-item" style="background-image: url('images/newtheater.jpg')">
             <div class="carousel-caption d-none d-md-block">
@@ -170,8 +172,10 @@ echo "<div class='row'>";
  ?>
 
    </div>
-<br>
 
+<br>
+<center><a class="btn btn-primary" href="search.php">Search</a><center>
+<br>
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
