@@ -122,9 +122,10 @@
                   echo "<h5>Number of Seats Available: " . $numseat . "</h5>";
                   echo "<h5>Cost per Seat:  10$ </h5>";
       echo "<h5>Number of Tickets: </h5>";
-        echo "<select class='custom-select' id='numtickets' name='numtickets_chosen'>";
-            // Get all showing dates
-    $date_query_result = $conn->query("select distinct StartDate from Showing");
+      echo "<select class='custom-select' id='numtickets' name='numtickets_chosen'>";
+
+    // Get all showing dates
+    //$date_query_result = $conn->query("select distinct StartDate from Showing");
     
      for ($x = 0; $x <= $numseat; $x++) {
         
@@ -143,10 +144,10 @@ echo "<br>";
             echo "<input type='submit' value = 'Purchase'>";
             echo "</form>";
   
-                    echo "</div>";
-                    echo "</div>";
-                echo "</div>";
-              echo "</div>";
+            echo "</div>";
+            echo "</div>";
+            echo "</div>";
+            echo "</div>";
             //echo "</div>";
 
             

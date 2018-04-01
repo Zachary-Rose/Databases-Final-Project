@@ -36,25 +36,12 @@
     $phone = mysqli_fetch_array($phone_query_result)['PhoneNumber'];
 
     $resnum_query_result = $conn->query("select ReservationNumber from Reservations where AccountNumber ='$accountnumber'");
-    $resnum = mysqli_fetch_array($resnum_query_result)['ReservationNumber'];
+    //$resnum = mysqli_fetch_array($resnum_query_result)['ReservationNumber'];
 
-    $shonum_query_result = $conn->query("select ShowingNumber from Reservations where AccountNumber ='$accountnumber'");
-    $shonum = mysqli_fetch_array($shonum_query_result)['ShowingNumber'];
 
-    $quantity_query_result = $conn->query("select Quantity from Reservations where AccountNumber ='$accountnumber'");
-    $quantity = mysqli_fetch_array($quantity_query_result)['Quantity'];
+    //$resnum_query_result = $conn->query("select distinct ReservationNumber from Reservations where  AccountNumber ='$accountnumber'");
 
-    $date_query_result = $conn->query("select StartDate from Showing where ShowingNumber ='$shonum'");
-    $date = mysqli_fetch_array($date_query_result)['StartDate'];
 
-    $complex_query_result = $conn->query("select ComplexName from Showing where ShowingNumber ='$shonum'");
-    $complex = mysqli_fetch_array($complex_query_result)['ComplexName'];
-
-    $time_query_result = $conn->query("select StartTime from Showing where ShowingNumber ='$shonum'");
-    $time = mysqli_fetch_array($time_query_result)['StartTime'];
-
-    $movie_query_result = $conn->query("select MovieTitle from Showing where ShowingNumber ='$shonum'");
-    $movie = mysqli_fetch_array($movie_query_result)['MovieTitle'];
 
 ?>
 
@@ -117,77 +104,72 @@
         echo "<small>" . $fname . " "  . $lname . "</small>";
         ?>
       </h1>   
-
-
+      <h4> Address: <?php echo "$streetnum "; echo " $street"; echo  "  $city"; ?> </h4>
+      <?php
+            	//<a href="writereview.php" class="btn btn-primary">Review Movie</a>
+            	echo "<form method='get' action='usersettings.php'>";
+                echo "<input type='submit' class='btn btn-primary'  value='Update Info' >";
+                echo "</form>";
+       ?>
 <br>
 
 
-
-<div class="row">
-
-
-
 <?php
-         echo "<div class='col-lg-4 col-md-6 mb-4'>";
-              echo "<div class='card h-100'>";
-                echo "<div class='card-body'>";
-                  echo "<h4 class='card-title'><a href=''>" . $movie . "</a></h4>";
-                  echo "<h5>Complex: " . $complex . "</h5>";
-                  echo "<h5>Time: " . $time . "</h5>";
-                  //echo "<p class='card-text'>" . $plot ."</p>";
-                  echo "<div class='col-md-4 mb-3'>";
-      
-        echo "<form method='get' action='cancelticket.php'>";
-        echo "<input type='hidden' name='Title' value='$movie'>";
-        echo "<input type='submit' value = 'Cancel'>";
-        echo "</form>";
-  
-        echo "</div>";
-        echo "</div>";
-                echo "</div>";
-              echo "</div>";
+while ($row = mysqli_fetch_array($resnum_query_result)) {
 
-  ?>
+    $resnum = $row['ReservationNumber'];
 
+
+    $shonum_query_result = $conn->query("select ShowingNumber from Reservations where AccountNumber ='$accountnumber'");
+    $shonum = mysqli_fetch_array($shonum_query_result)['ShowingNumber'];
+
+    $quantity_query_result = $conn->query("select Quantity from Reservations where AccountNumber ='$accountnumber'");
+    $quantity = mysqli_fetch_array($quantity_query_result)['Quantity'];
+
+    $date_query_result = $conn->query("select StartDate from Showing where ShowingNumber ='$shonum'");
+    $date = mysqli_fetch_array($date_query_result)['StartDate'];
+
+    $complex_query_result = $conn->query("select ComplexName from Showing where ShowingNumber ='$shonum'");
+    $complex = mysqli_fetch_array($complex_query_result)['ComplexName'];
+
+    $time_query_result = $conn->query("select StartTime from Showing where ShowingNumber ='$shonum'");
+    $time = mysqli_fetch_array($time_query_result)['StartTime'];
+
+    $movie_query_result = $conn->query("select MovieTitle from Showing where ShowingNumber ='$shonum'");
+    $movie = mysqli_fetch_array($movie_query_result)['MovieTitle'];
+
+
+
+?>
+    <div class="row">
        <div class="col-sm-4 my-4">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title"> <?php echo " $movie "; ?> </h4>
-              <p class="card-text">Showing Day: <?php echo " $date "; ?> </p>
-               <p class="card-text">Showing Time: <?php echo " $time "; ?> </p>
-               <p class="card-text">Number of Tickets: <?php echo " $quantity "; ?> </p>
+              <h4 class="card-title"> <?php echo  $movie ; ?> </h4>
+              <p class="card-text">Showing Day: <?php echo  $date ; ?> </p>
+               <p class="card-text">Showing Time: <?php echo $time ; ?> </p>
+               <p class="card-text">Location: <?php echo  $complex ; ?> </p>
+               <p class="card-text">Number of Tickets: <?php echo  $quantity ; ?> </p>
             </div>
             <div class="card-footer">
             	<?php
+            	//<a href="writereview.php" class="btn btn-primary">Review Movie</a>
             	echo "<form method='get' action='cancelticket.php'>";
-                echo "<input type='submit' class='btn btn-primary' name='Title' value='Cancel Ticket' >";
+            	echo "<input type='hidden' name='ReservationNumber' value='" . $resnum . "'>";
+                echo "<input type='submit' class='btn btn-primary'  value='Cancel Ticket' >";
                 echo "</form>";
                 ?>
-           
             </div>
           </div>
         </div>
+    </div>
+    <!-- /.row -->
 
+<?php
+}
+?>
 
-        <div class="col-sm-4 my-4">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title">Peter Rabbit</h4>
-              <p class="card-text">Number of Tickets: 1 </p>
-              <p class="card-text">Showing Day: 24th </p>
-               <p class="card-text">Showing Time: 18:10 </p>
-            </div>
-            <div class="card-footer">
-              <a href="writereview.php" class="btn btn-primary">Review Movie</a>
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-      <!-- /.row -->
-
-      <br>
+    <br>
 
     <!-- Footer -->
     <footer class="py-5 bg-dark">
