@@ -12,10 +12,14 @@
         die("Connection_failed:" . $conn->connect_error);
     }
 
+
     // Get all movie names
     $movie_query_result = $conn->query("select distinct MovieTitle from Showing");
     //$num_movies = count($movies);
  
+
+    $accountnumber = $_SESSION["accountnumber"];
+    //echo $accountnumber;
 ?>
 
 <!DOCTYPE html>
@@ -146,7 +150,6 @@ echo "<div class='row'>";
 
             echo "<div class='col-lg-4 col-md-6 mb-4'>";
               echo "<div class='card h-100'>";
-                echo "<a> <img class= 'card-img-top' src='../images/" . $image . "' alt='' > </a>";
                 echo "<div class='card-body'>";
                   echo "<h4 class='card-title'><a href=''>" . $movie . "</a></h4>";
                   echo "<h5>Rating: " . $rating . "</h5>";

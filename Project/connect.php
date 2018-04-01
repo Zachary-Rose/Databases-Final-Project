@@ -7,9 +7,9 @@ $dbname = "final_theaterdb";
 
 
 $today = strtotime("Yesterday"); //???? Why won't it work for today
-$recemail = $_POST["email"];                      
-$recpassword = $_POST["password"];
-$_SESSION["email"] = $recemail;
+$gotemail = $_POST["email"];                      
+$gotpassword = $_POST["password"];
+$_SESSION['email'] = $gotemail;
 $_SESSION['current_date'] = date("Y-m-d", $today);
 echo $_SESSION['current_date'];
 
@@ -20,34 +20,28 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$user_query = "SELECT AccountNumber FROM User where Email = '$recemail'";
-$user_id = $conn->query($user_query);
-$_SESSION["user_id"] = mysqli_fetch_array($email)['Email'];
-$sql = "SELECT Email, Password, IsAdmin FROM User where Email = '$recemail' and Password = '$recpassword' ";
-$result = $conn->query($sql);
 
-if ($result->num_rows > 0 and $user_id->num_rows >0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-	   echo "You have successfully logged into the database"; 
-	   header('Location: ../Project/home.php'); 
+
+$usernum_query_result = $conn->query("select AccountNumber from User where Email = '$gotemail' and Password = '$gotpassword'");
+            $accountnumber = mysqli_fetch_array($usernum_query_result)['AccountNumber'];
+      $_SESSION['accountnumber'] = $accountnumber;
+
+$isadmin_query_result = $conn->query("select IsAdmin from User where Email = '$gotemail' and Password = '$gotpassword'");
+            $isadmin = mysqli_fetch_array($isadmin_query_result)['IsAdmin'];
+
+    if ($isadmin == 0 ){
+       echo "successfully login"; 
+       header('Location: ../Project/home.php'); 
     }
-} else { 
-    $user_query = "SELECT Email FROM User where email = '$recemail'";
-    $user_id = $conn->query($user_query);
-    $_SESSION["email"] = mysqli_fetch_array($user_id)['email'];
-    $sql = "SELECT Email, Password FROM User where email = '$recemail' and Password = '$recpassword' ";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0 and $user_id->num_rows >0) {
-        // output data of each row
-        while($row = $result->fetch_assoc()) {
-	       echo "You have successfully logged into the database"; 
-	       header('Location: ../admin/admin.php'); 
+    else{
+        if ($isadmin != 0 ) {
+           echo "successfully login"; 
+           header('Location: ../Project/adminpage.php'); 
         }
-    } else {
-        header('Location: ../Project/login.html?loginInvalid');
+        else {
+        header('Location: ../Project/login.html');
+        }
     }
-}
+
 $conn->close();
 ?>

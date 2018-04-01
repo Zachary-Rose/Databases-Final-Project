@@ -86,6 +86,8 @@
 
     while ($row = mysqli_fetch_array($showing_query_result)) {
 
+
+      echo "<form class='d-flex justify-content-around' action='../Project/purchaseticket.php' method='POST'>";
         $showing = $row['ShowingNumber'];
         // echo $showing;    
         
@@ -136,7 +138,7 @@ echo "<br>";
 
         echo "<div class='col-md-4 mb-3'>";
       
-            echo "<form method='get' action='buy.php'>";
+            echo "<form method='get' action='purchaseticket.php'>";
             echo "<input type='hidden' name='Title' value='$movie'>";
             echo "<input type='submit' value = 'Purchase'>";
             echo "</form>";
@@ -151,6 +153,8 @@ echo "<br>";
     }
     echo "<br>";
     echo "</div>";
+    echo "</form>";
+    
  ?>
 
 <br>

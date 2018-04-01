@@ -12,7 +12,12 @@
         die("Connection_failed:" . $conn->connect_error);
     }
 
+    $accountnumber = $_SESSION["accountnumber"];
+    
+    //$fname = $_POST["FNAME"];
 
+    //echo $fname;
+    echo $accountnumber;
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +75,9 @@
 
       <!-- Portfolio Item Heading -->
       <h1 class="my-4">Hi
-        <small>Username</small>
+        <?php 
+        echo "<small>" . $accountnumber . "</small>";
+        ?>
       </h1>   
 
 
@@ -91,7 +98,7 @@
                <p class="card-text">Showing Time: 19:30 </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn btn-primary">Cancel Purchase</a>
+              <a href="cancelticket.php" class="btn btn-primary">Cancel Purchase</a>
             </div>
           </div>
         </div>
@@ -106,7 +113,7 @@
                <p class="card-text">Showing Time: 18:10 </p>
             </div>
             <div class="card-footer">
-              <a href="reviews.html" class="btn btn-primary">Review Movie</a>
+              <a href="writereview.php" class="btn btn-primary">Review Movie</a>
             </div>
           </div>
         </div>
@@ -120,7 +127,7 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Theater 332</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Theater Hub Corp</p>
       </div>
       <!-- /.container -->
     </footer>
