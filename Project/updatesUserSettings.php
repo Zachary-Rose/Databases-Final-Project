@@ -41,6 +41,7 @@ CreditCardNumber = $cardNum,
 ExpDate = $cardExp,
 IsAdmin = $adminCheck 
 WHERE ACCOUNTNUMBER = 0";
+//THIS LAST LINE MUCH CHANGED WHERE ACCOUNT NUMBER = GLOBAL VARIABLE USERS ACCOUNT NUMBER
 
 if ($conn->query($sql) === TRUE) {
    echo "New record created successfully";

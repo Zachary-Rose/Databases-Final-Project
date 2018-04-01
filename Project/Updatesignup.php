@@ -61,5 +61,5 @@ if ($conn->query($sql) === TRUE) {
 #echo $cardExp;
 #echo "<br>";
 #echo $adminCheck;
- header ('Location: profile.php');
+ header ('Location: login.html');
 ?>

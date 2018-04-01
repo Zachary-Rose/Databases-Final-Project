@@ -105,12 +105,9 @@
         ?>
       </h1>   
       <h4> Address: <?php echo "$streetnum "; echo " $street"; echo  "  $city"; ?> </h4>
-      <?php
-            	//<a href="writereview.php" class="btn btn-primary">Review Movie</a>
-            	echo "<form method='get' action='usersettings.php'>";
-                echo "<input type='submit' class='btn btn-primary'  value='Update Info' >";
-                echo "</form>";
-       ?>
+      <form>
+<input type="button" value="Change User Information" onclick="window.location.href='UserSettings.php'" />
+</form>
 <br>
 
 
