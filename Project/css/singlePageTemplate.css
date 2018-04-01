@@ -226,12 +226,12 @@ footer .footer_column p {
 	font-weight: bold;
 	letter-spacing: 2px;
 	border: 3px solid #FFFFFF;
-	color: #FFFFFF;
+	color: #52bad5;
 	transition: all 0.3s linear;
 }
 .button:hover {
 	background-color: #FEFEFE;
-	color: #C4C4C4;
+	color: #52bad5;
 	cursor: pointer;
 }
 .copyright {

@@ -72,8 +72,9 @@ $userID="";
             ?>
       </tbody>
     </table>
+	  
 <div align="center">
-	<form action="#" method="post">
+	<form class="d-flex justify-content-around" action="deleteuser.php" method="POST">
       Account: <select name = "AccNum" >
     <?php  
     $AccNum_query = $conn->query("SELECT AccountNumber FROM user");
@@ -89,15 +90,9 @@ $userID="";
       
       </div>
 		<div align="center">
-	  <input type="button" class="button" name="submit" value="Delete" align="center">
+	  
+			<button class="button" type="submit">Delete Member &raquo;</button>
 			</form>
-			<?php 
-			if(isset($_POST['submit'])){
-				$selected_val = $_POST['AccNum'];  // Storing Selected Value In Variable
-				echo "You have selected :" .$selected_val;  // Displaying Selected Value
-				$Delete_User_Query = $conn->query("DELETE FROM user WHERE AccountNum = 'AccNum'");
-				}
-			?>
 	  </div>
   </section>
 	<?php
@@ -168,7 +163,7 @@ Street Number: <input type="text" name="StreetNum" value="<?php echo $StreetNum;
 Street: <input type="text" name="Street" value="<?php echo $Street;?>"><br>
 City: <input type="text" name="City" value="<?php echo $City;?>"><br>
 Postal Code: <input type="text" name="Postal" value="<?php echo $Postal;?>"><br>
-<input type="submit" class="button" name="submit" value="Add" align="center">
+<button class="button" type="submit">Add Theater &raquo;</button>
 </form>
 		  <?php
 echo $Name;
@@ -201,23 +196,38 @@ if ($conn->query($sql) === TRUE) {
 	</section>
   <section class="hero" id="hero">
     <h2 class="hero_header">Edit Theater </h2>
-	  <form action="/action_page.php">
-		  <div align="center">
-<div align="center">
-	Theater: <select class="light">
-    <option value="Theater1">Theater1</option>
-    <option value="Theater2">Theater2</option>
-    <option value="Theater3">Theater3</option>
-</select></div>
-Name: <input type="text" name="Name" value=""><br>
-Number of Theaters: <input type="text" name="" value=""><br>
-Phone Number: <input type="text" name="Name" value=""><br>
-Address: <input type="text" name="Name" value=""><br>
-<div class="button">Update</div>
-</form>
-		  </div>
-</section>
+	  <div align="center">
+	<form class="d-flex justify-content-around" action="editTheater.php" method="POST">
+      Theater: <select name = "Theater" >
+    <?php  
+    $Edit_Theater_query = $conn->query("SELECT ComplexName FROM theatercomplex");
+    while ($row = mysqli_fetch_array($Edit_Theater_query)) {
 
+        $Account = $row['ComplexName'];
+        echo "<option value='" . $Account . "'>" . $Account . "</option>";
+		
+    }
+
+    ?>
+        </select>
+		
+		
+      </div>
+		  <div align="center">
+		Number of Theaters: <input type="text" name="ENum"><br>
+		Phone Number: <input type="text" name="EPhoneNum"><br>
+		Street Number: <input type="text" name="EStreetNum"><br>
+        Street: <input type="text" name="EStreet"><br>
+		City: <input type="text" name="ECity"><br>
+		Postal Code: <input type="text" name="EPostal"><br>
+		  
+		  </div>
+		  
+		<div align="center">
+	  
+			<button class="button" type="submit">Update &raquo;</button>
+			</form>
+	  </div>
  </section>
 	<?php
 	$Title = $RunTime = $Rating = $Plot = $Director = $Production = $Supplier = $StartDate = $EndDate = "";
@@ -333,99 +343,103 @@ if ($conn->query($sql) === TRUE) {
 
 	</section>
 
-	 <section class="hero" id="hero">
+	<section class="hero" id="hero">
     <h2 class="hero_header">Edit Showing </h2>
-	  <form action="/action_page.php">
-		  <div align="center">
-<div align="center">
-	Theater: <select class="light">
-    <option value="Movie1">Movie1</option>
-    <option value="Movie2">Movie2</option>
-    <option value="Movie3">Movie3</option>
-</select></div>
-			  <div align="center">
-	Showing: <select class="light">
-    <option value="Showing1">Show1</option>
-    <option value="Showing2">Show2</option>
-    <option value="Showing3">Show3</option>
-</select></div>
+	  <div align="center">
+	<form class="d-flex justify-content-around" action="editShowing.php" method="POST">
+      Showing: <select name = "Showing" >
+    <?php  
+    $Edit_Showing_query = $conn->query("SELECT ShowingNumber FROM showing");
+    while ($row = mysqli_fetch_array($Edit_Showing_query)) {
 
-Start Time: <input type="text" name="Name" value=""><br>
-Date: <input type="text" name="" value=""><br>
-Theater Number: <input type="text" name="Name" value=""><br>
-Avalible Steats: <input type="text" name="Name" value=""><br>
-<div class="button">Update</div>
-</form>
+        $SNumber = $row['ShowingNumber'];
+        echo "<option value='" . $SNumber . "'>" . $SNumber . "</option>";
+		
+    }
+
+    ?>
+        </select>
+		<div>
+		 Movie Title: <select name = "Movie" >
+    <?php  
+    $Movie_query = $conn->query("SELECT MovieTitle FROM showing ");
+    while ($row = mysqli_fetch_array($Movie_query)) {
+
+        $SMovie = $row['MovieTitle'];
+        echo "<option value='" . $SMovie . "'>" . $SMovie . "</option>";
+		
+    }
+
+    ?>
+        </select>
+			</div>
+		
+		</select>
+		 Theater : <select name = "Theater" >
+    <?php  
+    $Theater_query = $conn->query("SELECT ComplexName FROM showing ");
+    while ($row = mysqli_fetch_array($Theater_query)) {
+
+        $STheater = $row['ComplexName'];
+        echo "<option value='" . $STheater . "'>" . $STheater . "</option>";
+		
+    }
+
+    ?>
+        </select>
+		
+		
+      </div>
+		  <div align="center">
+		Start Time: <input type="text" name="EStartTime"><br>
+        Start Date: <input type="text" name="EStartDate"><br>
+		Theater Number: <input type="text" name="ETNum"><br>
+		Number of Seats Available: <input type="text" name="ESeats"><br>
+		  
 		  </div>
-</section>
+		  
+		<div align="center">
+	  
+			<button class="button" type="submit">Update &raquo;</button>
+			</form>
+	  </div>
+ </section>
 
 	<section class="hero" id="hero">
-    <h2 class="hero_header">Customer History </h2>
-		  <div align="center">
-			  <div align="center">
-	Customer: <select class="light">
-    <option value="Customer1">Customer1</option>
-    <option value="Customer2">Customer2</option>
-    <option value="Customer3">Customer3</option>
-</select></div>
-			  <table width="200" border="1">
-  <tbody>
-    <tr>
-      <th scope="col">&nbsp;</th>
-      <th scope="col">&nbsp;</th>
-      <th scope="col">&nbsp;</th>
-      <th scope="col">&nbsp;</th>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-  </tbody>
-</table>
+    <h2 class="hero_header"> Customer History </h2>
+	  <div align="center">
+	<form class="d-flex justify-content-around" action="showHistory.php" method="POST">
+      Account Number: <select name = "ID" >
+    <?php  
+    $History_query = $conn->query("SELECT DISTINCT AccountNumber FROM reservations");
+    while ($row = mysqli_fetch_array($History_query)) {
+
+        $HNum = $row['AccountNumber'];
+        echo "<option value='" . $HNum . "'>" . $HNum . "</option>";
+		
+    }
+
+    ?>
+        </select>
+		<div>
+			<button class="button" type="submit">Get History &raquo;</button>
+		</div>
+		  </form>
+			  
 		  </div>
 	</section>
 
 	<section class="hero" id="hero">
     <h2 class="hero_header">Most Popular</h2>
 		<div align="center">
-		<div class="button">Get Theater</div><table width="200" border="1">
-  <tbody align="center">
-    <tr>
-      <th scope="col">&nbsp;</th>
-    </tr>
-  </tbody>
-</table>
-
+		<form class="d-flex justify-content-around" action="getTheater.php" method="POST">
+		<button class="button" type="submit">Get Theaters &raquo;</button>
+			</form>
 		</div>
 		<div align="center">
-		<div class="button">Get Movie</div><table width="200" border="1">
-  <tbody align="center">
-    <tr>
-      <th scope="col">&nbsp;</th>
-    </tr>
-  </tbody>
-</table>
-
+			<form class="d-flex justify-content-around" action="getMovie.php" method="POST">
+		<button class="button" type="submit">Get Movies &raquo;</button>
+			</form>
 	  </div>
 	</section>
 
@@ -440,8 +454,11 @@ Avalible Steats: <input type="text" name="Name" value=""><br>
   <!-- Footer Section -->
   <section class="footer_banner" id="contact">
     <h2 class="hidden">Footer Banner Section </h2>
-<div class="button">Log Out</div>
-  </section>
+<form class="d-flex justify-content-around" action="login.html" method="POST">
+	<div align="center">
+		<button class="button" type="submit">Log Out &raquo;</button>
+		</div>
+			</form>
   <!-- Copyrights Section --></div>
 <!-- Main Container Ends -->
 </body>

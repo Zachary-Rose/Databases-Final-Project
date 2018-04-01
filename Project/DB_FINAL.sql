@@ -125,8 +125,10 @@ insert into Reviews values
 
 insert into Reservations values
 (00000000,1234,1 ,2),
-(00001111,4567,3 ,1),
-(00002222,8910,2, 5);
+(00001111,4567,3 ,3),
+(00001111,6942,3 ,4),
+(00002222,8910,2, 4),
+(00002222,9110,4,10);
 
 
 
@@ -154,7 +156,8 @@ insert into MovieSupplier values
 insert into Showing values
 (1, 'Black Panther','The Screening Room', '17:30', 'March 10th 2017', 1, 27),
 (2, 'Avengers Age of Ultron','The Screening Room', '17:30', 'December 25th 2199' , 1, 50),
-(3, 'Sherlock Gnomes', 'Landmark Cinemas 10 Kingston', '09:00','February 29th 3015',2,70);
+(3, 'Sherlock Gnomes', 'Landmark Cinemas 10 Kingston', '09:00','February 29th 3015',2,70),
+(4, 'Sherlock Gnomes', 'Landmark Cinemas 10 Kingston', '12:00', 'Febuary 31st 1942',2,70);
 
 insert into MovieActors values
 ('Black Panther', 'John', 'Doe'),
