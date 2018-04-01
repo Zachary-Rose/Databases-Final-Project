@@ -7,6 +7,7 @@
     
     // Connect to Database
     $conn = new mysqli($servername, $username, $password, $dbname);
+
     // Check connection
     if ($conn->connect_error) {
         die("Connection_failed:" . $conn->connect_error);
@@ -81,13 +82,14 @@
 
     echo "<div class='row'>";
 
+
     // Get all showings of searched params
     $showing_query_result = $conn->query("select distinct ShowingNumber from Showing where MovieTitle ='$movieVal' and ComplexName = '$theaterVal' and StartDate = '$dayVal' ");
 
     while ($row = mysqli_fetch_array($showing_query_result)) {
 
 
-      echo "<form class='d-flex justify-content-around' action='../Project/purchaseticket.php' method='POST'>";
+      
         $showing = $row['ShowingNumber'];
         // echo $showing;    
         
@@ -111,7 +113,9 @@
             $time = mysqli_fetch_array($time_query_result)['StartTime'];
 
 
-            echo "<div class='col-lg-4 col-md-6 mb-4'>";
+echo "<form class='d-flex justify-content-around' action='../Project/purchaseticket.php' method='POST'>";
+
+            //echo "<div class='col-lg-4 col-md-6 mb-4'>";
               echo "<div class='card h-100'>";
                 echo "<div class='card-body'>";
                   echo "<h4 class='card-title'>" . $movie . "</h4>";
@@ -121,46 +125,32 @@
                   echo "<h5>Time: " . $time . "</h5>";
                   echo "<h5>Number of Seats Available: " . $numseat . "</h5>";
                   echo "<h5>Cost per Seat:  10$ </h5>";
-      echo "<h5>Number of Tickets: </h5>";
-      echo "<select class='custom-select' id='numtickets' name='numtickets_chosen'>";
 
-    // Get all showing dates
-    //$date_query_result = $conn->query("select distinct StartDate from Showing");
-    
-     for ($x = 0; $x <= $numseat; $x++) {
-        
-        echo "<option value='" . $x . "'>" . $x . "</option>";
-     } 
-            
-        echo "</select>";
+                  echo "<h5>Number of Tickets: </h5>";
+                  echo "<select class='custom-select' id='numtickets' name='numtickets_chosen'>";
+          for ($x = 0; $x <= $numseat; $x++) {
+               unset($id, $numtickets); 
+               echo "<option value='" . $x . "'>" . $x . "</option>";
+          } 
+                  echo "</select>";
 
-echo "<br>";
-echo "<br>";
-
-        echo "<div class='col-md-4 mb-3'>";
-      
-            echo "<form method='get' action='purchaseticket.php'>";
-            echo "<input type='hidden' name='Title' value='$movie'>";
-            echo "<input type='submit' value = 'Purchase'>";
-            echo "</form>";
-  
+                  echo "<br>";
+                  echo "<div class='col-md-4 mb-3'>";
+                    echo "<br>";
+                    echo "<center><button class='btn btn-primary pb-2' type='submit'>Pruchase Ticket &raquo;</button><center>";
+                    echo "<br>";
+                  echo "</div>";
+                echo "</div>";
             echo "</div>";
-            echo "</div>";
-            echo "</div>";
-            echo "</div>";
-            //echo "</div>";
-
-            
+        //echo "</div>";
+        //echo "</div>"; 
+        echo "</form>";   
     }
-    echo "<br>";
-    echo "</div>";
-    echo "</form>";
     
+    echo "</div>";
  ?>
 
-<br>
-<center><a class="btn btn-primary" href="search.php">Change Search</a><center>
-<br>
+    <br>
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">

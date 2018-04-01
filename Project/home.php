@@ -16,7 +16,6 @@
     // Get all movie names
     $movie_query_result = $conn->query("select distinct MovieTitle from Showing");
     //$num_movies = count($movies);
- 
 
     $accountnumber = $_SESSION["accountnumber"];
     //echo $accountnumber;
@@ -90,21 +89,23 @@
         </ol>
         <div class="carousel-inner" role="listbox">
 
-           <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('images/logo.png')">
+           
+          <!-- Slide One - Set the background image for this slide in the line below -->
+           <div class="carousel-item active" style="background-image: url('images/logo.png')">
              <div class="carousel-caption d-none d-md-block">
               <h3></h3>
               
             </div>
           </div>
-          <!-- Slide One - Set the background image for this slide in the line below -->
-          <div class="carousel-item active" style="background-image: url('images/popcorn.jpg')">
+         
+         <!-- Slide Two - Set the background image for this slide in the line below -->
+          <div class="carousel-item " style="background-image: url('images/popcorn.jpg')">
             <div class="carousel-caption d-none d-md-block">
               <h3>Popcorn SALE!</h3>
               <p>15% OFF Popcorn on Wednesdays!</p>
             </div>
           </div>
-         
+
           <!-- Slide Three - Set the background image for this slide in the line below -->
           <div class="carousel-item" style="background-image: url('images/newtheater.jpg')">
             <div class="carousel-caption d-none d-md-block">
@@ -145,9 +146,6 @@ echo "<div class='row'>";
             $runtime_query_result = $conn->query("select RunningTime from Movie where MovieTitle ='$movie'");
             $runtime = mysqli_fetch_array($runtime_query_result)['RunningTime'];
 
-            $image_query_result = $conn->query("select ImageURL from Movie where MovieTitle ='$movie'");
-            $image = mysqli_fetch_array($image_query_result)['ImageURL'];
-
             echo "<div class='col-lg-4 col-md-6 mb-4'>";
               echo "<div class='card h-100'>";
                 echo "<div class='card-body'>";
@@ -182,7 +180,7 @@ echo "<div class='row'>";
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Theater 332</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Theater Hub Corp</p>
       </div>
       <!-- /.container -->
     </footer>

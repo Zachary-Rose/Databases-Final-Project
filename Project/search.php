@@ -12,11 +12,9 @@
         die("Connection_failed:" . $conn->connect_error);
     }
 
-   
-
 ?>
 
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -67,28 +65,29 @@
       </div>
     </nav>
 
+
+ <!-- Portfolio Item Heading -->
+      <h1 class="my-4">Search Movies</h1>
+      
     <!-- Page Content -->
     <div class="container">
 
-      <!-- Portfolio Item Heading -->
-      <h1 class="my-4">Search Movies</h1>
+     
 
-      <br>
+      
 
 <!-- Portfolio Item Row -->
 <form class="d-flex justify-content-around" action="../Project/showings.php" method="POST">
+       <!-- <div class="row"> -->
 
-      <div class="row">
         <div class="col-md-4">
-          <h3 class="my-3" for="complexselect">Theater:</h3>
+          <h3 class="my-3" >Theater:</h3>
 
           <select class="custom-select" id="complex" name="complex_chosen">
     <?php  
 
          // Get all theater names
     $complex_query_result = $conn->query("select distinct ComplexName from Showing");
-
-
     while ($row = mysqli_fetch_array($complex_query_result)) {
         unset($id, $complex); 
         $complex = $row['ComplexName'];
@@ -96,18 +95,18 @@
     }
 
     ?>
-
-
-        </select>
+      </select>
       </div>
       </div>
+    
 
       <!-- /.row -->
 
 <br>
 
 <!-- Portfolio Item Row -->
-      <div class="row">
+<div class="container">
+      <!-- <div class="row"> -->
         <div class="col-md-4">
           <h3 class="my-3">Movie:</h3>
            <select class="custom-select" id="movie" name="movie_chosen">
@@ -124,13 +123,13 @@
         </select>
       </div>
       </div>
-
       <!-- /.row -->
 
 <br>
 
       <!-- Portfolio Item Row -->
-      <div class="row">
+      <div class="container">
+      <!-- <div class="row"> -->
         <div class="col-md-4">
           <h3 class="my-3" for="date">Day:</h3>
         
@@ -152,20 +151,18 @@
 
 <br>
 
-
-
-
-
-<div class="row">
 <div class="pb-3">
 
-<button class="btn btn-primary pb-2" type="submit">Get Showings &raquo;</button>
+<center><button class="btn btn-primary pb-2" type="submit">Get Showings &raquo;</button><center>
 
 </div>
-</div>
+
 <br>
+
 </form>
-<br>
+
+</body>
+
 
     <!-- Footer -->
     <footer class="py-5 bg-dark">

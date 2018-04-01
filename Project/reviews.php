@@ -12,8 +12,9 @@
         die("Connection_failed:" . $conn->connect_error);
     }
 
+    $accountnumber = $_SESSION["accountnumber"];
     // Get all movie names
-    $movie_query_result = $conn->query("select distinct MovieTitle from Showing");
+    //$movie_query_result = $conn->query("select distinct MovieTitle from Showing");
   
 ?>
 
@@ -97,7 +98,43 @@
   ?>
 
    <br>
+
+<?php
+    $acount_query_result = $conn->query("select Review from Reviews where MovieTitle ='$moviecValue' and AccountNumber = '$accountnumber' ");
+    $exists = mysqli_fetch_array($acount_query_result)['Review'];
+
+
+        if ($exists == NULL ) {
+
+
+?>
+                <!-- Comments Form -->
+          <div class="card my-4">
+            <h5 class="card-header">Leave a Review:</h5>
+            <div class="card-body">
+              <form>
+                <div class="form-group">
+                  <textarea class="form-control" rows="2"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" href="addreview.php">Submit</button>
+              </form>
+            </div>
+          </div>
+
+    <?php
+        }
+        else {
+        
+        }
+
+
+
+ ?>
+ 
+<center><button type="submit" class="btn btn-primary" href="home.php">Back Home</button><center>
+      <br>  
    </div>
+
 
     <!-- Footer -->
     <footer class="py-5 bg-dark">
