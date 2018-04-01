@@ -13,11 +13,49 @@
     }
 
     $accountnumber = $_SESSION["accountnumber"];
-    
-    //$fname = $_POST["FNAME"];
 
-    //echo $fname;
-    echo $accountnumber;
+    $fname_query_result = $conn->query("select FNAME from User where AccountNumber ='$accountnumber'");
+    $fname = mysqli_fetch_array($fname_query_result)['FNAME'];
+
+    $lname_query_result = $conn->query("select LNAME from User where AccountNumber ='$accountnumber'");
+    $lname = mysqli_fetch_array($lname_query_result)['LNAME'];
+
+    $streetnum_query_result = $conn->query("select StreetNumber from User where AccountNumber ='$accountnumber'");
+    $streetnum = mysqli_fetch_array($streetnum_query_result)['StreetNumber'];
+
+    $street_query_result = $conn->query("select Street from User where AccountNumber ='$accountnumber'");
+    $street = mysqli_fetch_array($street_query_result)['Street'];
+
+    $city_query_result = $conn->query("select City from User where AccountNumber ='$accountnumber'");
+    $city = mysqli_fetch_array($city_query_result)['City'];
+
+    $email_query_result = $conn->query("select Email from User where AccountNumber ='$accountnumber'");
+    $email = mysqli_fetch_array($email_query_result)['Email'];
+
+    $phone_query_result = $conn->query("select PhoneNumber from User where AccountNumber ='$accountnumber'");
+    $phone = mysqli_fetch_array($phone_query_result)['PhoneNumber'];
+
+    $resnum_query_result = $conn->query("select ReservationNumber from Reservations where AccountNumber ='$accountnumber'");
+    $resnum = mysqli_fetch_array($resnum_query_result)['ReservationNumber'];
+
+    $shonum_query_result = $conn->query("select ShowingNumber from Reservations where AccountNumber ='$accountnumber'");
+    $shonum = mysqli_fetch_array($shonum_query_result)['ShowingNumber'];
+
+    $quantity_query_result = $conn->query("select Quantity from Reservations where AccountNumber ='$accountnumber'");
+    $quantity = mysqli_fetch_array($quantity_query_result)['Quantity'];
+
+    $date_query_result = $conn->query("select StartDate from Showing where ShowingNumber ='$shonum'");
+    $date = mysqli_fetch_array($date_query_result)['StartDate'];
+
+    $complex_query_result = $conn->query("select ComplexName from Showing where ShowingNumber ='$shonum'");
+    $complex = mysqli_fetch_array($complex_query_result)['ComplexName'];
+
+    $time_query_result = $conn->query("select StartTime from Showing where ShowingNumber ='$shonum'");
+    $time = mysqli_fetch_array($time_query_result)['StartTime'];
+
+    $movie_query_result = $conn->query("select MovieTitle from Showing where ShowingNumber ='$shonum'");
+    $movie = mysqli_fetch_array($movie_query_result)['MovieTitle'];
+
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +114,7 @@
       <!-- Portfolio Item Heading -->
       <h1 class="my-4">Hi
         <?php 
-        echo "<small>" . $accountnumber . "</small>";
+        echo "<small>" . $fname . " "  . $lname . "</small>";
         ?>
       </h1>   
 
@@ -89,16 +127,43 @@
 
 
 
+<?php
+         echo "<div class='col-lg-4 col-md-6 mb-4'>";
+              echo "<div class='card h-100'>";
+                echo "<div class='card-body'>";
+                  echo "<h4 class='card-title'><a href=''>" . $movie . "</a></h4>";
+                  echo "<h5>Complex: " . $complex . "</h5>";
+                  echo "<h5>Time: " . $time . "</h5>";
+                  //echo "<p class='card-text'>" . $plot ."</p>";
+                  echo "<div class='col-md-4 mb-3'>";
+      
+        echo "<form method='get' action='cancelticket.php'>";
+        echo "<input type='hidden' name='Title' value='$movie'>";
+        echo "<input type='submit' value = 'Cancel'>";
+        echo "</form>";
+  
+        echo "</div>";
+        echo "</div>";
+                echo "</div>";
+              echo "</div>";
+
+  ?>
+
        <div class="col-sm-4 my-4">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Batman</h4>
-              <p class="card-text">Number of Tickets: 5 </p>
-              <p class="card-text">Showing Day: 27th </p>
-               <p class="card-text">Showing Time: 19:30 </p>
+              <h4 class="card-title"> <?php echo " $movie "; ?> </h4>
+              <p class="card-text">Showing Day: <?php echo " $date "; ?> </p>
+               <p class="card-text">Showing Time: <?php echo " $time "; ?> </p>
+               <p class="card-text">Number of Tickets: <?php echo " $quantity "; ?> </p>
             </div>
             <div class="card-footer">
-              <a href="cancelticket.php" class="btn btn-primary">Cancel Purchase</a>
+            	<?php
+            	echo "<form method='get' action='cancelticket.php'>";
+                echo "<input type='submit' class='btn btn-primary' name='Title' value='Cancel Ticket' >";
+                echo "</form>";
+                ?>
+           
             </div>
           </div>
         </div>
