@@ -59,7 +59,6 @@ ProductionCompany           VARCHAR(30)	    NOT NULL,
 NameOfSupplier              VARCHAR(15)	    NOT NULL,
 StartDay                    NUMERIC(8,0)	NOT NULL,  # year(4) - month(2) - day(2)
 EndDate                     NUMERIC(8,0)	NOT NULL,  # year(4) - month(2) - day(2)
-ImageURL              VARCHAR(30)         NOT NULL,
 PRIMARY KEY(MovieTitle),
 FOREIGN KEY(NameOfSupplier) REFERENCES MovieSupplier(NameOfSupplier)
 
@@ -108,9 +107,9 @@ FOREIGN KEY(AccountNumber) REFERENCES User(AccountNumber) ON DELETE CASCADE
 );
 
 insert into Movie values
-('Black Panther',145,'PG-13','After the death of his father he becomes the black Panther','Ryan Coogler' , 'Marvel', 'SupplierThatIsReal',20180126,20180315,'blackpanther.jpeg'),
-('Sherlock Gnomes',86,'R', 'After Gnomeo comes home from work and catches his wife with the neighbor, he must hire Sherlock Gnomes (Samuel Jackson) to find dirt on his wife in order to win custody of his son', 'Mel Gibson', 'Paramount','SupplyGuy',20180202,20180227, 'sherlockgnomes.jpeg'),
-('Avengers Age of Ultron',135,'PG-13','Ironman and Captian America look for legal documants to prove Ultron is of age to enter the club for Thors bachelor party','Michael Bay', 'Marvel', 'CouchTime', 20180301,20180428,'avengersageofultron.jpeg');
+('Black Panther',145,'PG-13','After the death of his father he becomes the black Panther','Ryan Coogler' , 'Marvel', 'SupplierThatIsReal',20180126,20180315),
+('Sherlock Gnomes',86,'R', 'After Gnomeo comes home from work and catches his wife with the neighbor, he must hire Sherlock Gnomes (Samuel Jackson) to find dirt on his wife in order to win custody of his son', 'Mel Gibson', 'Paramount','SupplyGuy',20180202,20180227),
+('Avengers Age of Ultron',135,'PG-13','Ironman and Captian America look for legal documants to prove Ultron is of age to enter the club for Thors bachelor party','Michael Bay', 'Marvel', 'CouchTime', 20180301,20180428);
 
 insert into User values
 (00000000,'Zach','Rose', 73, 'Princess Street', 'Kingston',9053341994, '13zmr@queensu.ca', 'passwordtest', 4724090203239999, 0521,  0),

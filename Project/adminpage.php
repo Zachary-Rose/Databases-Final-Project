@@ -95,101 +95,20 @@ $userID="";
 			</form>
 	  </div>
   </section>
-	<?php
-	$Name = $Num = $PhoneNum = $StreetNum = $Street = $City = $Postal ="";
 	
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		
-		if (empty($_POST["Name"])) {
-    	$Name = "";
-  		} 
-		else {
-    	$Name = "'". test_input($_POST["Name"]."'");
-  		}
-  		if (empty($_POST["Num"])) {
-    	$Num = "";
-  		}
-		else {
-    	$Num = test_input($_POST["Num"]);
-  		}
-  		if (empty($_POST["PhoneNum"])) {
-    	$PhoneNum = "";
-  		} 
-		else {
-    	$PhoneNum = test_input($_POST["PhoneNum"]);
-  		}
-  		if (empty($_POST["StreetNum"])) {
-    	$StreetNum = "";
-  		} 
-		else {
-    	$StreetNum = test_input($_POST["StreetNum"]);
-		}
-		if (empty($_POST["Street"])) {
-    	$Street = "";
-  		} 
-		else {
-    	$Street = "'".test_input($_POST["Street"]."'");
-		}
-		if (empty($_POST["City"])) {
-    	$City = "";
-  		} 
-		else {
-    	$City = "'".test_input($_POST["City"]."'");
-		}
-		if (empty($_POST["Postal"])) {
-    	$Postal = "";
-  		} 
-		else {
-    	$Postal ="'". test_input($_POST["Postal"]."'");
-		}
-	}
-	
-	function test_input($data) {
-		$data = trim($data);
-		$data = stripslashes($data);
-  		$data = htmlspecialchars($data);
-	return $data;
- }  
-
-	?>
   <section class="hero" id="hero">
     <h2 class="hero_header">Add Theater </h2>
-	  <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+	  <form class="d-flex justify-content-around" action="addTheater.php" method="POST">
 		  <div align="center">
-Name: <input type="text" name="Name" value="<?php echo $Name;?>"><br>
-Number of Theaters: <input type="text" name="Num" value="<?php echo $Num;?>"><br>
-Phone Number: <input type="text" name="PhoneNum" value="<?php echo $PhoneNum;?>"><br>
-Street Number: <input type="text" name="StreetNum" value="<?php echo $StreetNum;?>"><br>
-Street: <input type="text" name="Street" value="<?php echo $Street;?>"><br>
-City: <input type="text" name="City" value="<?php echo $City;?>"><br>
-Postal Code: <input type="text" name="Postal" value="<?php echo $Postal;?>"><br>
+Name: <input type="text" name="Name"><br>
+Number of Theaters: <input type="text" name="Num"><br>
+Phone Number: <input type="text" name="PhoneNum"><br>
+Street Number: <input type="text" name="StreetNum"><br>
+Street: <input type="text" name="Street"><br>
+City: <input type="text" name="City"><br>
+Postal Code: <input type="text" name="Postal"><br>
 <button class="button" type="submit">Add Theater &raquo;</button>
 </form>
-		  <?php
-echo $Name;
-echo "<br>";
-echo $Num;
-echo "<br>";
-echo $PhoneNum;
-echo "<br>";
-echo $StreetNum;
-echo "<br>";
-echo $Street;
-echo "<br>";
-echo $City;
-echo "<br>";
-echo $Postal;
-?>
-		  
-		  <?php
-$sql = "INSERT INTO theatercomplex  
-VALUES ($Name, $Num, $PhoneNum, $StreetNum, $Street, $City, $Postal)";
-if ($conn->query($sql) === TRUE) {
-   echo "New record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-		  ?>
 		  </div>
 </section>
 
@@ -229,116 +148,27 @@ if ($conn->query($sql) === TRUE) {
 			</form>
 	  </div>
  </section>
-	<?php
-	$Title = $RunTime = $Rating = $Plot = $Director = $Production = $Supplier = $StartDate = $EndDate = "";
 	
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		
-		if (empty($_POST["Title"])) {
-    	$Title = "";
-  		} 
-		else {
-    	$Title = "'".test_input($_POST["Title"]."'");
-  		}
-		if (empty($_POST["RunTime"])) {
-    	$RunTime = "";
-  		} 
-		else {
-    	$RunTime = test_input($_POST["RunTime"]);
-  		}
-  		if (empty($_POST["Rating"])) {
-    	$Rating = "";
-  		}
-		else {
-    	$Rating ="'". test_input($_POST["Rating"]."'");
-  		}
-		
-  		if (empty($_POST["Plot"])) {
-    	$Plot = "";
-  		} 
-		else {
-    	$Plot = "'".test_input($_POST["Plot"]."'");
-  		}
-  		if (empty($_POST["Director"])) {
-    	$Director = "";
-  		} 
-		else {
-    	$Director = "'".test_input($_POST["Director"]."'");
-		}
-		if (empty($_POST["Production"])) {
-    	$Production = "";
-  		} 
-		else {
-    	$Production = "'".test_input($_POST["Production"]."'");
-		}
-		if (empty($_POST["Supplier"])) {
-    	$Supplier = "";
-  		} 
-		else {
-    	$Supplier = "'".test_input($_POST["Supplier"]."'");
-		}
-		if (empty($_POST["StartDate"])) {
-    	$StartDate = "";
-  		} 
-		else {
-    	$StartDate ="'". test_input($_POST["StartDate"]."'");
-		}
-		if (empty($_POST["EndDate"])) {
-    	$EndDate = "";
-  		} 
-		else {
-    	$EndDate ="'". test_input($_POST["EndDate"]."'");
-		}
-	}
-	
-   
-
-	?>
   <section class="hero" id="hero">
     <h2 class="hero_header">Add Movie </h2>
-	  <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+	  <form class="d-flex justify-content-around" action="addMovie.php" method="POST">
 		  <div align="center">
-Title: <input type="text" name="Title" value="<?php echo $Title;?>"><br>
-Running Time: <input type="text" name="RunTime" value="<?php echo $RunTime;?>"><br>
-Rating: <input type="text" name="Rating" value="<?php echo $Rating;?>"><br>
-Plot: <input type="text" name="Plot" value="<?php echo $Plot;?>"><br>
-Director: <input type="text" name="Director" value="<?php echo $Director;?>"><br>
-Production Company: <input type="text" name="Production" value="<?php echo $Production;?>"><br>
-Supplier: <input type="text" name="Supplier" value="<?php echo $Supplier;?>"><br>
-Start Date: <input type="text" name="StartDate" value="<?php echo $StartDate;?>"><br>
-End Date: <input type="text" name="EndDate" value="<?php echo $EndDate;?>"><br>			  
-<input type="submit" class="button" name="submit" value="Add" align="center">
-</form>
-		  <?php
-echo $Title;
-echo "<br>";
-echo $RunTime;
-echo "<br>";
-echo $Rating;
-echo "<br>";
-echo $Plot;
-echo "<br>";
-echo $Director;
-echo "<br>";
-echo $Production;
-echo "<br>";
-echo $Supplier;
-echo "<br>";
-echo $StartDate;
-echo "<br>";
-echo $EndDate;
-?>
+Title: <input type="text" name="Title"><br>
+Running Time: <input type="text" name="Runtime"><br>
+Rating: <input type="text" name="Rating"><br>
+Plot: <input type="text" name="Plot"><br>
+Director: <input type="text" name="Dir"><br>
+Production Company: <input type="text" name="Pro"><br>
+Supplier: <input type="text" name="Sup"><br>
+Start Date: <input type="text" name="Start"><br>
+End Date: <input type="text" name="End"><br>			  	  
+</div>
+	<div align="center">
+	  
+			<button class="button" type="submit">Update &raquo;</button>
+			</form>
+	  </div>
 		  
-		  <?php
-$sql = "INSERT INTO movie 
-VALUES ($Title, $RunTime, $Rating, $Plot, $Director, $Production, $Supplier, $StartDate, $EndDate)";
-if ($conn->query($sql) === TRUE) {
-   echo "New record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-		  ?>
-		  </div>
 </section>
 
 	</section>
