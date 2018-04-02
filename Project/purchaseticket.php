@@ -18,8 +18,8 @@
      // Values from Search
     $numtickets = $_POST["numtickets_chosen"];
 
-    //$showing = $_POST['ShowingNum'];
-    $showing = 1;
+    $showing = $_POST["ShowingNum"];
+    //$showing = 1;
     echo $showing;
 
     //echo $numtickets;

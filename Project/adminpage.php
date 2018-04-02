@@ -13,6 +13,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
+    echo "fail";
 }
 
 $userID="";
@@ -192,7 +193,7 @@ End Date: <input type="text" name="End"><br>
 		<div>
 		 Movie Title: <select name = "Movie" >
     <?php  
-    $Movie_query = $conn->query("SELECT MovieTitle FROM showing ");
+    $Movie_query = $conn->query("SELECT DISTINCT MovieTitle FROM showing ");
     while ($row = mysqli_fetch_array($Movie_query)) {
 
         $SMovie = $row['MovieTitle'];
@@ -207,7 +208,7 @@ End Date: <input type="text" name="End"><br>
 		</select>
 		 Theater : <select name = "Theater" >
     <?php  
-    $Theater_query = $conn->query("SELECT ComplexName FROM showing ");
+    $Theater_query = $conn->query("SELECT DISTINCT ComplexName FROM showing ");
     while ($row = mysqli_fetch_array($Theater_query)) {
 
         $STheater = $row['ComplexName'];

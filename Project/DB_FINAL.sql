@@ -1,5 +1,5 @@
 
-create database FINAL_theaterdb;
+create database final_theaterdb;
 
 CREATE TABLE TheaterComplex (
 ComplexName			        VARCHAR(50)	    NOT NULL,
@@ -113,7 +113,8 @@ insert into Movie values
 
 insert into User values
 (00000000,'Zach','Rose', 73, 'Princess Street', 'Kingston',9053341994, '13zmr@queensu.ca', 'passwordtest', 4724090203239999, 0521,  0),
-(00001111,'John','Smith', 71, 'Derp Street', 'Kingston',9063341454, 'demo@queensu.ca', 'demo', 1111990203239999, 1121, 0),
+(00001111,'John','Smith', 71, 'Derp Street', 'Kingston',9063341454, 'demo@gmail.com', 'demo', 1111990203239999, 1121, 0),
+(00003333,'Scott','Waters', 44, 'Johnson Street', 'Kingston',4163341454, 'admin@gmail.com', 'admin', 11156789999, 1191, 1),
 (00002222,'JP','McCluskey', 224, 'Earl Street', 'Kingston',9063341454, '13zzz@queensu.ca', 'passwordAAAA', 1111990203239998, 1128, 0);
 
 insert into Reviews values
@@ -125,7 +126,7 @@ insert into Reviews values
 insert into Reservations values
 (00000000,1234,1 ,2),
 (00001111,4567,3 ,3),
-(00001111,6942,3 ,4),
+(00001111,6942,1 ,3),
 (00002222,8910,2, 4),
 (00002222,9110,4,10);
 
@@ -152,8 +153,10 @@ insert into MovieSupplier values
 ('SupplierThatIsReal','James Ready',7874446666, 1919,'Verdugo Blvd','Los Angeles','91011'),
 ('SupplyGuy','Sam Smith',4167773333, 13,'Bloor Street','Toronto','M4W3Z5'),
 ('CouchTime', 'Cpt Morgan', 4168884545, 420, 'Blaze Ave','Toronto','M4W2H9');
+
 insert into Showing values
 (1, 'Black Panther','The Screening Room', '17:30', 'March 10th 2017', 1, 27),
+(5, 'Black Panther','The Screening Room', '15:30', 'March 10th 2017', 1, 5),
 (2, 'Avengers Age of Ultron','The Screening Room', '17:30', 'December 25th 2199' , 1, 50),
 (3, 'Sherlock Gnomes', 'Landmark Cinemas 10 Kingston', '09:00','February 29th 3015',2,70),
 (4, 'Sherlock Gnomes', 'Landmark Cinemas 10 Kingston', '12:00', 'Febuary 31st 1942',2,70);
