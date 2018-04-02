@@ -39,7 +39,7 @@ $isadmin_query_result = $conn->query("select IsAdmin from User where Email = '$g
            header('Location: ../Project/adminpage.php'); 
         }
         else {
-        header('Location: ../Project/login.html');
+            header('Location: ../Project/login.html');
         }
     }
 

@@ -14,6 +14,7 @@
 
     $resnum = $_GET['ReservationNumber'];
     //echo $resnum;
+    
 
 
 $sql = "DELETE FROM Reservations WHERE ReservationNumber = $resnum";

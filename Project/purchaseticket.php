@@ -19,6 +19,7 @@
     $numtickets = $_POST["numtickets_chosen"];
 
     $showing = $_POST["ShowingNum"];
+    //$showing = $_SESSION["ShowingNum"];
     //$showing = 1;
     echo $showing;
 
@@ -41,6 +42,7 @@ if ($conn->query($sql) === TRUE) {
             //$conn->query("UPDATE Showing SET num_seats = num_seats - $num_tickets WHERE showing_id = '$showing_id'");
             
             //$conn->query("insert into Reservations (reservation_id, num_tickets, account_num, showing_id) values ('$next_reservation_id', $num_tickets, $user_id, '$showing_id')");
+
   header ('Location: profile.php');
            
 ?>

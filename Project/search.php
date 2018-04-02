@@ -65,14 +65,11 @@
       </div>
     </nav>
 
-
- <!-- Portfolio Item Heading -->
-      <h1 class="my-4">Search Movies</h1>
-      
     <!-- Page Content -->
     <div class="container">
 
-     
+      <!-- Portfolio Item Heading -->
+      <h1 class="my-4">Search Movies</h1>
 
       
 

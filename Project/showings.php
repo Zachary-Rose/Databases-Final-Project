@@ -94,7 +94,7 @@
       
         $showing = $row['ShowingNumber'];
         //echo $showing;    
-
+        //$_SESSION['ShowingNum'] = $showing;
 
         
             $movie_query_result = $conn->query("select MovieTitle from Showing where ShowingNumber ='$showing'");
@@ -137,12 +137,12 @@ echo "<form class='d-flex justify-content-around' action='../Project/purchasetic
                echo "<option value='" . $x . "'>" . $x . "</option>";
           } 
                   echo "</select>";
-
-
+                  
                   echo "<br>";
                   echo "<div class='col-md-4 mb-3'>";
                     echo "<br>";
-                    echo "<input type='hidden' name='ShowingNum' value=' $showing' ";
+                    echo "<input type='hidden' name='ShowingNum' value=' $showing' />";
+                   
                     echo "<center><button class='btn btn-primary pb-2' type='submit'>Pruchase Ticket &raquo;</button><center>";
                     echo "<br>";
                   echo "</div>";

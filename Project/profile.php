@@ -115,15 +115,15 @@
 while ($row = mysqli_fetch_array($resnum_query_result)) {
 
     $resnum = $row['ReservationNumber'];
+    //echo  $resnum ;
 
-
-    $shonum_query_result = $conn->query("select ShowingNumber from Reservations where AccountNumber ='$accountnumber'");
+    $shonum_query_result = $conn->query("select ShowingNumber from Reservations where AccountNumber ='$accountnumber' and ReservationNumber = '$resnum' ");
     $shonum = mysqli_fetch_array($shonum_query_result)['ShowingNumber'];
 
-    $quantity_query_result = $conn->query("select Quantity from Reservations where AccountNumber ='$accountnumber'");
+    $quantity_query_result = $conn->query("select Quantity from Reservations where AccountNumber ='$accountnumber'and ReservationNumber = '$resnum' ");
     $quantity = mysqli_fetch_array($quantity_query_result)['Quantity'];
 
-    $date_query_result = $conn->query("select StartDate from Showing where ShowingNumber ='$shonum'");
+    $date_query_result = $conn->query("select StartDate from Showing where ShowingNumber ='$shonum' ");
     $date = mysqli_fetch_array($date_query_result)['StartDate'];
 
     $complex_query_result = $conn->query("select ComplexName from Showing where ShowingNumber ='$shonum'");

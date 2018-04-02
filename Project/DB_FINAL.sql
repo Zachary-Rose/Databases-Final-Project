@@ -119,6 +119,8 @@ insert into User values
 
 insert into Reviews values
 ('Black Panther',00000000,'Almost died watching movie, fire alarm went off '),
+('Black Panther',00003333,'I liked this movie because my favourite amimal is a panther! '),
+('Black Panther',00002222,'Five stars!'),
 ('Avengers Age of Ultron', 00001111,'Movie was very bad fell asleep'),
 ('Sherlock Gnomes', 00002222,'This movie changed my life, I wish I could hire someone as intelligent as Sherlock Gnomes to help me get my kids back'),
 ('Sherlock Gnomes', 00001111, 'Amazing Movie!!! I mortgaged my house so I could see it a few more times!!');
