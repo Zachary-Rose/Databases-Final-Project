@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-$dbname = "FINAL_theaterdb";
+$dbname = "final_theaterdb";
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -48,7 +48,7 @@ function test_input($data) {
 <div class="container">
   <form>
     <div class="row">
-      <h4>Create Account</h4>
+      <h4>Update User Info</h4>
       </div>
     
       <div class="input-group input-group-icon">
@@ -72,7 +72,7 @@ function test_input($data) {
       </div>
 
       <div class="input-group">
-        <input type="text" placeholder="Phone Number"  name = "phoneNum"required/>
+        <input type="text" placeholder="Phone Number"  name = "phoneNum" required />
         <div class="input-icon"></div>
       </div>
 
@@ -91,7 +91,7 @@ function test_input($data) {
         <div class="input-icon"><i class="fa fa-key"></i></div>
       </div>
 
-    </div>
+  
 
     <div class="row">
       <h4>Payment Details</h4>
@@ -112,7 +112,7 @@ function test_input($data) {
        <center><button class="btn btn-primary pb-2" type="submit">Submit Information &raquo;</button><center>
     
   </form>
-
+  </div>
 
 </body>
 </html>

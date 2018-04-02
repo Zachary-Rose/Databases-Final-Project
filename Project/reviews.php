@@ -13,9 +13,12 @@
     }
 
     $accountnumber = $_SESSION["accountnumber"];
+
     // Get all movie names
     //$movie_query_result = $conn->query("select distinct MovieTitle from Showing");
-  
+
+    $moviecValue = $_GET['Title'];
+    $_SESSION['moviename'] = $moviecValue;
 ?>
 
       <!DOCTYPE html>
@@ -72,8 +75,8 @@
     <div class="container">
 
 <?php
-            $moviecValue = $_GET['Title'];
-
+      
+      
       //<!-- Portfolio Item Heading -->
       echo "<h1 class='my-4'> " . $moviecValue . "</h1>";
       echo "<br>";
@@ -112,11 +115,12 @@
           <div class="card my-4">
             <h5 class="card-header">Leave a Review:</h5>
             <div class="card-body">
-              <form>
-                <div class="form-group">
-                  <textarea class="form-control" rows="2"></textarea>
+              <form class="d-flex justify-content-around" action="writereview.php" method="POST">
+                <div class="input-group">
+                  <input type="text" placeholder="Write a review!"  name = "review" rows="2"  class="form-control" required/>
                 </div>
-                <button type="submit" class="btn btn-primary" href="addreview.php">Submit</button>
+                <br>
+                <button type="submit" class="btn btn-primary" >Submit Review </button>
               </form>
             </div>
           </div>
@@ -126,6 +130,8 @@
         else {
         
         }
+
+       
 
 
 

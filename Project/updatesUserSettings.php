@@ -12,7 +12,7 @@
         die("Connection_failed:" . $conn->connect_error);
     }
 	//Pre-Set values
-    $accountNumberGenerator = 0;
+    $accountNumberGenerator = $_SESSION["accountnumber"];
 	$adminCheck = 0; 
     // Values from Search
     $fName = "'".$_POST["fName"]. "'";
@@ -40,7 +40,7 @@ Password = $password,
 CreditCardNumber = $cardNum,
 ExpDate = $cardExp,
 IsAdmin = $adminCheck 
-WHERE ACCOUNTNUMBER = 0";
+WHERE ACCOUNTNUMBER = $accountNumberGenerator";
 //THIS LAST LINE MUCH CHANGED WHERE ACCOUNT NUMBER = GLOBAL VARIABLE USERS ACCOUNT NUMBER
 
 if ($conn->query($sql) === TRUE) {

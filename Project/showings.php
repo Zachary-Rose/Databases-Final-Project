@@ -20,6 +20,8 @@
     // echo $theaterVal;
     // echo $movieVal;
     // echo $dayVal;
+
+
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +93,9 @@
 
       
         $showing = $row['ShowingNumber'];
-        // echo $showing;    
+        //echo $showing;    
+
+
         
             $movie_query_result = $conn->query("select MovieTitle from Showing where ShowingNumber ='$showing'");
             $movie = mysqli_fetch_array($movie_query_result)['MovieTitle'];
@@ -134,9 +138,11 @@ echo "<form class='d-flex justify-content-around' action='../Project/purchasetic
           } 
                   echo "</select>";
 
+
                   echo "<br>";
                   echo "<div class='col-md-4 mb-3'>";
                     echo "<br>";
+                    echo "<input type='hidden' name='ShowingNum' value=' $showing' ";
                     echo "<center><button class='btn btn-primary pb-2' type='submit'>Pruchase Ticket &raquo;</button><center>";
                     echo "<br>";
                   echo "</div>";
