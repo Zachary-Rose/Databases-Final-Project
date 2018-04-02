@@ -13,7 +13,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-    echo "fail";
 }
 
 $userID="";
@@ -26,7 +25,7 @@ $userID="";
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TheaterHub Admin</title>
-<link href="css/singlePageTemplate.css" rel="stylesheet" type="text/css">
+<link href="singlePageTemplate.css" rel="stylesheet" type="text/css">
 <!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
 <script>var __adobewebfontsappname__="dreamweaver"</script>
 <script src="http://use.edgefonts.net/source-sans-pro:n2:default.js" type="text/javascript"></script>
@@ -60,7 +59,7 @@ $userID="";
         </thead>
       <tbody>
         <?php
-            $member_table_results = $conn->query("SELECT AccountNumber, FNAME, LNAME, Email FROM user");
+            $member_table_results = $conn->query("SELECT AccountNumber, FNAME, LNAME, Email FROM user WHERE IsAdmin = 0");
            while($row = mysqli_fetch_array($member_table_results)){ 
 		  		echo "<tr>";
                 echo "<td>" . $row['AccountNumber'] . "</td>";
@@ -78,7 +77,7 @@ $userID="";
 	<form class="d-flex justify-content-around" action="deleteuser.php" method="POST">
       Account: <select name = "AccNum" >
     <?php  
-    $AccNum_query = $conn->query("SELECT AccountNumber FROM user");
+    $AccNum_query = $conn->query("SELECT AccountNumber FROM user WHERE IsAdmin = 0");
     while ($row = mysqli_fetch_array($AccNum_query)) {
 
         $Account = $row['AccountNumber'];
