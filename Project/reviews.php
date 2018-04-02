@@ -131,14 +131,12 @@
         
         }
 
-       
-
-
-
- ?>
  
-<center><button type="submit" class="btn btn-primary" href="home.php">Back Home</button><center>
+// <center><button type="submit" class="btn btn-primary" href="home.php">Back Home</button><center>
+
+   ?>
       <br>  
+
    </div>
 
 

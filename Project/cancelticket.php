@@ -19,7 +19,7 @@
 $sql = "DELETE FROM Reservations WHERE ReservationNumber = $resnum";
 
 if ($conn->query($sql) === TRUE) {
-   echo "New review deleted successfully";
+   echo "New ticket deleted successfully";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

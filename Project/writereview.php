@@ -13,19 +13,19 @@
     }
 
     $accountnumber = $_SESSION["accountnumber"];
-    $movieValue = $_SESSION["moviename"];
+    $movieValue = "'".$_SESSION["moviename"]. "'";
     $newreview  = "'".$_POST["review"]. "'";
 
     //echo $accountnumber;
     //echo $moviecValue;
     //echo $newreview;
 
-$review_insert = "INSERT INTO Reviews VALUES ($movieValue, $accountnumber, $newreview)";
+$sql = "INSERT INTO Reviews VALUES ($movieValue, $accountnumber, $newreview)";
 
-if ($conn->query($review_insert) === TRUE) {
+if ($conn->query($sql) === TRUE) {
    echo "New review created successfully";
 } else {
-    echo "Error: " . $review_insert . "<br>" . $conn->error;
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
  header ('Location: home.php');
